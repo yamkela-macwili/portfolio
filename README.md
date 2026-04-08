@@ -4,7 +4,7 @@ A modern, responsive portfolio website built with React, TypeScript, and Tailwin
 
 ## 🚀 Overview
 
-This project showcases my work as an Aspiring AI Systems Engineer. It features a clean, minimalist design with interactive elements, smooth animations, and a focus on performance and accessibility.
+This project showcases my work as a Backend Engineer. It features a clean, minimalist design with interactive elements, smooth animations, and a focus on performance and accessibility.
 
 ## 📚 Documentation
 

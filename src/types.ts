@@ -17,6 +17,9 @@ export interface Project {
   architecture?: string;
   challenges?: string;
   performance?: string;
+  problem?: string;
+  solution?: string;
+  impact?: string;
   content?: string;
   stars?: string;
 }

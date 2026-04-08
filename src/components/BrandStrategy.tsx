@@ -14,7 +14,7 @@ export default function BrandStrategy() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card title="Brand Positioning">
           <p className="text-slate-300 leading-relaxed">
-            You are not just a developer; you are an <strong className="text-emerald-400">Aspiring AI Systems Engineer</strong>. 
+            You are not just a developer; you are a <strong className="text-emerald-400">Backend Engineer</strong>. 
             You bridge the gap between complex data engineering and practical business operations for small and medium businesses.
           </p>
         </Card>
@@ -50,13 +50,13 @@ export default function BrandStrategy() {
         
         <Card>
           <h4 className="text-sm font-mono text-emerald-400 mb-2">SHORT (Twitter/LinkedIn Headline)</h4>
-          <p className="text-lg text-white font-medium">Aspiring AI Systems Engineer | Automating Document-Heavy Workflows for SMBs</p>
+          <p className="text-lg text-white font-medium">Backend Engineer | Automating Document-Heavy Workflows for SMBs</p>
         </Card>
 
         <Card>
           <h4 className="text-sm font-mono text-emerald-400 mb-2">MEDIUM (Conference Bio / About Section)</h4>
           <p className="text-slate-300 leading-relaxed">
-            I am an Aspiring AI Systems Engineer with a background in Applied Statistics. I specialize in building intelligent digital systems—from robust backends to AI-powered document retrieval (RAG)—that help small and medium businesses automate their most tedious workflows.
+            I am a Backend Engineer with a background in Applied Statistics. I specialize in building intelligent digital systems—from robust backends to AI-powered document retrieval (RAG)—that help small and medium businesses automate their most tedious workflows.
           </p>
         </Card>
 

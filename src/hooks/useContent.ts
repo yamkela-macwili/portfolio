@@ -25,11 +25,41 @@ export function useProjects() {
         if (error) throw error;
 
         if (data && data.length > 0) {
-          // Map snake_case to camelCase if needed and sort
-          const mappedProjects = data.map((p: any) => ({
-            ...p,
-            projectType: p.projectType || p.project_type,
-          }));
+          console.log('Raw data from Supabase:', data);
+          
+          // Map snake_case to camelCase and provide fallbacks for new fields
+          const mappedProjects = data.map((p: any) => {
+            const dbSlug = (p.slug || '').trim().toLowerCase();
+            const defaultProj = defaultProjects.find(dp => (dp.slug || '').trim().toLowerCase() === dbSlug);
+            
+            if (!defaultProj) {
+              console.warn(`No default project found for slug: "${dbSlug}". Available default slugs:`, defaultProjects.map(dp => dp.slug));
+            } else {
+              console.log(`Matched project: ${dbSlug}`, {
+                dbProblem: p.problem,
+                defaultProblem: defaultProj.problem
+              });
+            }
+
+            return {
+              ...p,
+              // Ensure we have values for the new fields, prioritizing DB then local data
+              problem: p.problem || defaultProj?.problem || 'Problem description pending...',
+              solution: p.solution || defaultProj?.solution || 'Solution details pending...',
+              impact: p.impact || defaultProj?.impact || 'Impact statement pending...',
+              
+              // Standard mapping
+              projectType: p.projectType || p.project_type || defaultProj?.projectType || 'Personal Project',
+              tech: p.tech || defaultProj?.tech || [],
+              featured: p.featured !== null && p.featured !== undefined ? p.featured : (defaultProj?.featured ?? false),
+              github: p.github || defaultProj?.github || '',
+              link: p.link || defaultProj?.link || '',
+              desc: p.desc || defaultProj?.desc || '',
+              category: p.category || defaultProj?.category || 'Development'
+            };
+          });
+
+          console.log('Final mapped projects:', mappedProjects);
 
           const dbProjects = mappedProjects.sort((a: any, b: any) => {
             if (a.created_at && b.created_at) {
@@ -139,10 +169,22 @@ export function useProject(slug: string | undefined) {
             throw error;
           }
         } else if (data) {
+          const dbSlug = (slug || '').trim().toLowerCase();
+          const defaultProj = defaultProjects.find(dp => (dp.slug || '').trim().toLowerCase() === dbSlug);
+          
           const mappedProject = {
             ...data,
-            projectType: data.projectType || data.project_type,
+            problem: data.problem || defaultProj?.problem || 'Problem description pending...',
+            solution: data.solution || defaultProj?.solution || 'Solution details pending...',
+            impact: data.impact || defaultProj?.impact || 'Impact statement pending...',
+            projectType: data.projectType || data.project_type || defaultProj?.projectType || 'Personal Project',
+            tech: data.tech || defaultProj?.tech || [],
+            github: data.github || defaultProj?.github || '',
+            link: data.link || defaultProj?.link || '',
+            desc: data.desc || defaultProj?.desc || '',
+            category: data.category || defaultProj?.category || 'Development'
           };
+          console.log(`Fetched single project ${dbSlug}:`, mappedProject);
           setProject(mappedProject);
           setLoading(false);
           return;

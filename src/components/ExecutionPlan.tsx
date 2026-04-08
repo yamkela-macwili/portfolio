@@ -20,7 +20,7 @@ export default function ExecutionPlan() {
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Buy domain (e.g., yournamesystems.com).</li>
                 <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Build V1 of portfolio using React/Tailwind.</li>
-                <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Update LinkedIn headline to "AI Systems Engineer".</li>
+                <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Update LinkedIn headline to "Backend Engineer".</li>
               </ul>
             </div>
             <div>

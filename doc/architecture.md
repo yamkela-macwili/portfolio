@@ -1,6 +1,6 @@
 # Architecture Overview
 
-This project is a modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS for an Aspiring AI Systems Engineer. It emphasizes a clean, minimalist aesthetic with interactive elements and smooth animations.
+This project is a modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS for a Backend Engineer. It emphasizes a clean, minimalist aesthetic with interactive elements and smooth animations.
 
 ## Tech Stack
 

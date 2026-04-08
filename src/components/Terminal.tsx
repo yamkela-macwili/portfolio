@@ -41,7 +41,7 @@ export default function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose
       case 'whoami':
         newHistory.push({ 
           type: 'output', 
-          content: 'Yamkela Macwili\nAspiring AI Systems Engineer\nSpecializing in Backend Systems, Data Engineering, and AI.' 
+          content: 'Yamkela Macwili\nBackend Engineer\nSpecializing in Backend Systems, Data Engineering, and AI.' 
         });
         break;
       case 'stack':
@@ -57,7 +57,7 @@ export default function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose
       case 'contact':
         newHistory.push({ 
           type: 'output', 
-          content: 'Email: yamkela22y@gmail.com\nGitHub: github.com/yamkela\nLinkedIn: linkedin.com/in/yamkela' 
+          content: 'Email: yamkela22y@gmail.com\nGitHub: github.com/yamkela-macwili\nLinkedIn: linkedin.com/in/yamkela-macwili-116442253' 
         });
         break;
       case 'clear':

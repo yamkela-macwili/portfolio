@@ -16,9 +16,13 @@ create table projects (
   type text check (type in ('free', 'premium')),
   price text, -- e.g. 'R2,900'
   link text,
+  github text,
   architecture text,
   challenges text,
   performance text,
+  problem text,
+  solution text,
+  impact text,
   content text, -- Markdown content
   stars text -- For open source projects
 );

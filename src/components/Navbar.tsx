@@ -26,9 +26,8 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'About', href: isHome ? "#about" : "/#about" },
-    { name: 'Education', href: isHome ? "#education" : "/#education" },
-    { name: 'Projects', href: "/projects" },
-    { name: 'Blog', href: "/blog" },
+    { name: 'Projects', href: isHome ? "#projects" : "/#projects" },
+    { name: 'Blog', href: isHome ? "#blog" : "/#blog" },
   ];
 
   return (
@@ -37,7 +36,7 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] md:w-[calc(100%-3rem)] max-w-3xl"
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] md:w-[calc(100%-3rem)] max-w-4xl"
       >
         <div className="glass-panel rounded-full px-4 md:px-6 h-14 flex items-center justify-between shadow-2xl">
           <Link 
@@ -51,9 +50,8 @@ export default function Navbar() {
           >
             <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-500 text-white group-hover:bg-emerald-400 transition-all duration-300">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M6 6L12 12L18 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 12V18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M6 18V12L12 18L18 12V18" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M4 17L10 11L4 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 19H20" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <span className="text-white font-medium tracking-tight group-hover:text-emerald-400 transition-colors hidden sm:inline">

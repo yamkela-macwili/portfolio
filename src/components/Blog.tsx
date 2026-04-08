@@ -12,14 +12,18 @@ export default function Blog() {
   return (
     <section id="blog" className="py-32 px-6 max-w-5xl mx-auto scroll-mt-10">
       <div className="flex items-end justify-between mb-16">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="text-4xl md:text-5xl font-medium tracking-tight text-white"
         >
-          Writing
-        </motion.h2>
+          <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-white mb-4">
+            Writing & Insights
+          </h2>
+          <p className="text-zinc-500 font-light max-w-md">
+            I write about real challenges I encounter while building systems.
+          </p>
+        </motion.div>
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
