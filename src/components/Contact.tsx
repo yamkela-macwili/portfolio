@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'motion/react';
-import { Loader2, AlertCircle, Mail, Github, Linkedin, Globe } from 'lucide-react';
+import { Loader2, AlertCircle, Mail, Github, Linkedin } from 'lucide-react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 type FormInputs = {
@@ -61,45 +61,33 @@ export default function Contact() {
             I’m always open to discussing new opportunities, backend challenges, or AI automation projects.
           </p>
 
-          <div className="space-y-6">
-            <a href="mailto:yamkela22y@gmail.com" className="flex items-center gap-4 group">
-              <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-400 group-hover:border-emerald-400 group-hover:text-black transition-all duration-300">
-                <Mail size={20} />
-              </div>
-              <div>
-                <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Email</div>
-                <div className="text-white group-hover:text-emerald-400 transition-colors">yamkela22y@gmail.com</div>
-              </div>
+          <div className="flex flex-wrap gap-4">
+            <a 
+              href="mailto:yamkela22y@gmail.com" 
+              className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:bg-emerald-400 hover:border-emerald-400 hover:text-black hover:-translate-y-1 transition-all duration-300 group"
+              title="Email"
+            >
+              <Mail size={24} />
             </a>
 
-            <a href="https://github.com/yamkela-macwili" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
-              <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-400 group-hover:border-emerald-400 group-hover:text-black transition-all duration-300">
-                <Github size={20} />
-              </div>
-              <div>
-                <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">GitHub</div>
-                <div className="text-white group-hover:text-emerald-400 transition-colors">github.com/yamkela-macwili</div>
-              </div>
+            <a 
+              href="https://github.com/yamkela-macwili" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:bg-emerald-400 hover:border-emerald-400 hover:text-black hover:-translate-y-1 transition-all duration-300 group"
+              title="GitHub"
+            >
+              <Github size={24} />
             </a>
 
-            <a href="https://www.linkedin.com/in/yamkela-macwili-116442253/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
-              <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-400 group-hover:border-emerald-400 group-hover:text-black transition-all duration-300">
-                <Linkedin size={20} />
-              </div>
-              <div>
-                <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">LinkedIn</div>
-                <div className="text-white group-hover:text-emerald-400 transition-colors">linkedin.com/in/yamkela-macwili-116442253</div>
-              </div>
-            </a>
-
-            <a href="https://www.macwili.co.za" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
-              <div className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-emerald-400 group-hover:border-emerald-400 group-hover:text-black transition-all duration-300">
-                <Globe size={20} />
-              </div>
-              <div>
-                <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-bold">Portfolio</div>
-                <div className="text-white group-hover:text-emerald-400 transition-colors">macwili.co.za</div>
-              </div>
+            <a 
+              href="https://www.linkedin.com/in/yamkela-macwili-116442253/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-zinc-400 hover:bg-emerald-400 hover:border-emerald-400 hover:text-black hover:-translate-y-1 transition-all duration-300 group"
+              title="LinkedIn"
+            >
+              <Linkedin size={24} />
             </a>
           </div>
         </motion.div>
