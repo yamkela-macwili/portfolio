@@ -1,4 +1,4 @@
-import { Skill, Education, Project, BlogPost } from './types';
+import { Skill, Education, Project, BlogPost, Certification } from './types';
 
 export const posts: BlogPost[] = [
   {
@@ -112,4 +112,12 @@ export const defaultEducation: Education[] = [
   }
 ];
 
-export const defaultCertifications: any[] = [];
+export const defaultCertifications: Certification[] = [
+  {
+    id: 'c1',
+    title: 'AZ-900: Microsoft Azure Fundamentals',
+    issuer: 'Microsoft',
+    date: '2026',
+    link: '#'
+  }
+];

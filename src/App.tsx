@@ -4,7 +4,6 @@ import Navbar from './components/Navbar';
 import ScrollProgress from './components/ScrollProgress';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
-import Chatbot from './components/Chatbot';
 import Home from './pages/Home';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
@@ -48,7 +47,6 @@ export default function App() {
             </Route>
           </Routes>
           <Footer />
-          <Chatbot />
         </div>
       </BrowserRouter>
     </AuthProvider>

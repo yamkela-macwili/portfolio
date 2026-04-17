@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { Project, BlogPost, Education, Certification, Skill } from '../types';
-import { defaultSkills, defaultEducation, projects as defaultProjects, posts as defaultPosts } from '../data';
+import { defaultSkills, defaultEducation, projects as defaultProjects, posts as defaultPosts, defaultCertifications } from '../data';
 
 export function useProjects() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -302,7 +302,7 @@ export function useCertifications() {
     async function fetchCertifications() {
       try {
         if (!supabase) {
-          setCertifications([]);
+          setCertifications(defaultCertifications);
           setLoading(false);
           return;
         }
@@ -317,11 +317,11 @@ export function useCertifications() {
         if (data && data.length > 0) {
           setCertifications(data);
         } else {
-          setCertifications([]);
+          setCertifications(defaultCertifications);
         }
       } catch (err) {
         console.error('Error fetching certifications:', err);
-        setCertifications([]);
+        setCertifications(defaultCertifications);
       } finally {
         setLoading(false);
       }
