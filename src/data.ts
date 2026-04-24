@@ -119,5 +119,12 @@ export const defaultCertifications: Certification[] = [
     issuer: 'Microsoft',
     date: '2026',
     link: '#'
+  },
+  {
+    id: 'c2',
+    title: 'WeThinkCode_ GenAI Course for Software Engineers',
+    issuer: 'WeThinkCode',
+    date: '2026',
+    link: '#'
   }
 ];
