@@ -76,17 +76,17 @@ export default function BusinessModel() {
         <Card title="Scaling Path (Freelance to SaaS)">
           <div className="relative pl-6 border-l-2 border-slate-700 space-y-6">
             <div className="relative">
-              <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-700 border-2 border-[#161920]"></div>
+              <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-700 border-2 border-surface"></div>
               <h4 className="text-white font-medium">Stage 1: Custom Agency</h4>
               <p className="text-sm text-slate-400">Build bespoke solutions for first 3-5 clients. Learn their exact pain points. Charge high project fees.</p>
             </div>
             <div className="relative">
-              <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-[#161920]"></div>
+              <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-emerald-500 border-2 border-surface"></div>
               <h4 className="text-white font-medium">Stage 2: Productized Service</h4>
               <p className="text-sm text-slate-400">Standardize the tech stack (FastAPI + React + pgvector). Sell the exact same architecture to multiple clients with slight UI tweaks.</p>
             </div>
             <div className="relative">
-              <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-700 border-2 border-[#161920]"></div>
+              <div className="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-slate-700 border-2 border-surface"></div>
               <h4 className="text-white font-medium">Stage 3: True SaaS</h4>
               <p className="text-sm text-slate-400">Build a multi-tenant platform where clients can sign up, upload their own documents, and use the AI without your manual intervention.</p>
             </div>

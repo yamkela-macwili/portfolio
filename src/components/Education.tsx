@@ -1,139 +1,140 @@
-import { motion } from 'motion/react';
-import { GraduationCap, Calendar, Terminal, BookOpen, Award, ExternalLink } from 'lucide-react';
+import { GraduationCap, Calendar, Award, ExternalLink, BookOpen } from 'lucide-react';
 import { useEducation, useCertifications } from '../hooks/useContent';
 
 export default function Education() {
   const { education, loading: eduLoading } = useEducation();
   const { certifications, loading: certLoading } = useCertifications();
 
-  const getIcon = (iconName: string | undefined) => {
-    switch (iconName?.toLowerCase()) {
-      case 'terminal': return Terminal;
-      case 'bookopen': return BookOpen;
-      default: return GraduationCap;
-    }
-  };
-
   if (eduLoading || certLoading) {
     return (
-      <section id="education" className="py-32 px-6 max-w-5xl mx-auto scroll-mt-10">
-        <div className="animate-pulse space-y-8">
-          <div className="h-12 bg-white/5 rounded-2xl w-1/3"></div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2 space-y-6">
-              <div className="h-40 bg-white/5 rounded-3xl"></div>
-              <div className="h-40 bg-white/5 rounded-3xl"></div>
-            </div>
-            <div className="space-y-4">
-              <div className="h-24 bg-white/5 rounded-2xl"></div>
-              <div className="h-24 bg-white/5 rounded-2xl"></div>
-            </div>
-          </div>
+      <section id="education" className="py-20 sm:py-28 px-6 max-w-6xl mx-auto scroll-mt-20">
+        <div className="animate-pulse space-y-6">
+          <div className="h-8 bg-surface rounded w-1/4"></div>
+          <div className="h-40 bg-surface rounded-xl"></div>
         </div>
       </section>
     );
   }
 
   return (
-    <section id="education" className="py-32 px-6 max-w-5xl mx-auto scroll-mt-10">
-      <motion.h2 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
-        className="text-4xl md:text-5xl font-medium tracking-tight text-white mb-16"
-      >
-        Education & Certs
-      </motion.h2>
+    <section id="education" className="py-20 sm:py-28 px-6 max-w-6xl mx-auto scroll-mt-20">
+      {/* Section Header */}
+      <div className="pb-8 mb-12 border-b border-border">
+        <div className="font-mono text-xs uppercase tracking-widest text-accent font-semibold mb-2">
+          Credentials &amp; Academic Background
+        </div>
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-fg">
+          Education &amp; Certifications
+        </h2>
+        <p className="text-sm sm:text-base text-fg-secondary max-w-2xl mt-2">
+          Formal academic training in quantitative statistics paired with industry-standard cloud and AI credentials.
+        </p>
+      </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <div className="lg:col-span-2 space-y-6">
-          <div className="text-micro text-zinc-500 mb-8 tracking-widest uppercase">Academic Path</div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Academic Degree Section */}
+        <div className="lg:col-span-7 space-y-6">
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-fg-subtle font-semibold mb-2">
+            <BookOpen size={14} className="text-accent" />
+            Undergraduate Degree
+          </div>
+
           {education.length > 0 ? (
-            education.map((item, i) => {
-              const Icon = getIcon(item.icon);
-              return (
-                <motion.div
-                  key={item.id || i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="glass-panel rounded-3xl p-8 md:p-10 hover:bg-white/[0.05] transition-colors relative overflow-hidden group"
-                >
-                  <div className="flex flex-col md:flex-row md:items-start gap-6">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <Icon size={24} className="text-emerald-400" />
+            education.map((item, i) => (
+              <div
+                key={item.id || i}
+                className="rounded-2xl bg-surface border border-border p-8 hover:border-border-hover transition-colors"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-surface-raised border border-border flex items-center justify-center text-accent shrink-0 mt-1">
+                      <GraduationCap size={24} />
                     </div>
-                    <div className="flex-1">
-                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-                        <div>
-                          <div className="flex items-center gap-2 text-emerald-400 mb-1">
-                            <GraduationCap size={16} />
-                            <span className="text-sm font-medium">{item.institution}</span>
-                          </div>
-                          <h3 className="text-xl font-medium text-white">{item.degree}</h3>
-                        </div>
-                        <div className="flex items-center gap-2 text-xs font-mono text-zinc-500 uppercase tracking-wider shrink-0">
-                          <Calendar size={14} />
-                          {item.period}
-                        </div>
+                    <div>
+                      <div className="font-mono text-xs font-semibold text-accent uppercase tracking-wider mb-1">
+                        {item.institution}
                       </div>
-                      <p className="text-zinc-400 font-light leading-relaxed text-sm">
-                        {item.description}
-                      </p>
+                      <h3 className="text-xl sm:text-2xl font-bold text-fg leading-snug">
+                        {item.degree}
+                      </h3>
                     </div>
                   </div>
-                </motion.div>
-              );
-            })
+
+                  <div className="inline-flex items-center gap-1.5 font-mono text-xs text-fg-muted bg-base px-3 py-1.5 rounded-lg border border-border shrink-0 self-start">
+                    <Calendar size={13} className="text-accent" />
+                    <span>{item.period}</span>
+                  </div>
+                </div>
+
+                <p className="text-sm sm:text-base text-fg-secondary leading-relaxed pl-0 sm:pl-16">
+                  {item.description}
+                </p>
+
+                <div className="mt-6 pt-6 border-t border-border pl-0 sm:pl-16 flex flex-wrap gap-2 text-xs font-mono text-fg-subtle">
+                  <span className="px-2.5 py-1 rounded bg-base border border-border text-fg-muted">
+                    Statistical Modeling
+                  </span>
+                  <span className="px-2.5 py-1 rounded bg-base border border-border text-fg-muted">
+                    Probability Theory
+                  </span>
+                  <span className="px-2.5 py-1 rounded bg-base border border-border text-fg-muted">
+                    Computational Analysis
+                  </span>
+                </div>
+              </div>
+            ))
           ) : (
-            <div className="p-12 text-center glass-panel rounded-3xl border-dashed border-white/10">
-              <p className="text-zinc-500 font-mono text-xs uppercase tracking-widest">No education entries found</p>
+            <div className="p-8 text-center bg-surface border border-border rounded-2xl">
+              <p className="font-mono text-xs text-fg-subtle">No education entries found</p>
             </div>
           )}
         </div>
 
-        <div className="space-y-6">
-          <div className="text-micro text-zinc-500 mb-8 tracking-widest uppercase">Certifications</div>
+        {/* Professional Certifications List */}
+        <div className="lg:col-span-5 space-y-6">
+          <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-fg-subtle font-semibold mb-2">
+            <Award size={14} className="text-accent" />
+            Verified Certifications
+          </div>
+
           <div className="space-y-4">
             {certifications.length > 0 ? (
               certifications.map((cert, i) => (
-                <motion.div
+                <div
                   key={cert.id || i}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                  className="glass-panel rounded-2xl p-6 hover:bg-white/[0.05] transition-colors group"
+                  className="rounded-xl bg-surface border border-border p-5 hover:border-border-hover transition-colors flex items-start gap-4"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 shrink-0 group-hover:border-emerald-500/30 transition-colors">
-                      <Award size={20} className="text-zinc-400 group-hover:text-emerald-400 transition-colors" />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-medium text-sm mb-1 leading-tight">{cert.title}</h4>
-                      <div className="flex items-center gap-2 text-[10px] text-zinc-500 uppercase tracking-widest">
-                        <span>{cert.issuer}</span>
-                        <span>•</span>
-                        <span>{cert.date}</span>
-                      </div>
-                      {cert.link && cert.link !== '#' && (
-                        <a 
-                          href={cert.link} 
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-[10px] text-emerald-500 mt-3 opacity-0 group-hover:opacity-100 transition-opacity"
-                        >
-                          Verify <ExternalLink size={10} />
-                        </a>
-                      )}
-                    </div>
+                  <div className="w-10 h-10 rounded-lg bg-surface-raised border border-border flex items-center justify-center shrink-0 mt-0.5 text-accent">
+                    <Award size={18} />
                   </div>
-                </motion.div>
+
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-sm sm:text-base font-bold text-fg mb-1 leading-snug">
+                      {cert.title}
+                    </h4>
+
+                    <div className="flex items-center gap-2 font-mono text-xs text-fg-subtle">
+                      <span className="text-accent font-semibold">{cert.issuer}</span>
+                      <span>•</span>
+                      <span>{cert.date}</span>
+                    </div>
+
+                    {cert.link && cert.link !== '#' && (
+                      <a
+                        href={cert.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 font-mono text-xs text-fg-subtle hover:text-fg mt-2 transition-colors"
+                      >
+                        Verify Credential <ExternalLink size={12} />
+                      </a>
+                    )}
+                  </div>
+                </div>
               ))
             ) : (
-              <div className="p-8 text-center glass-panel rounded-2xl border-dashed border-white/10">
-                <p className="text-zinc-500 font-mono text-[10px] uppercase tracking-widest">No certifications found</p>
+              <div className="p-6 text-center bg-surface border border-border rounded-xl">
+                <p className="font-mono text-xs text-fg-subtle">No certifications recorded</p>
               </div>
             )}
           </div>

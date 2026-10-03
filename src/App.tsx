@@ -21,7 +21,7 @@ export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <div className="min-h-screen bg-[#050505] text-zinc-300 font-sans selection:bg-white/20 selection:text-white">
+        <div className="min-h-screen bg-base text-fg font-sans selection:bg-accent/30 selection:text-fg">
           <ScrollProgress />
           <ScrollToTop />
           <Navbar />

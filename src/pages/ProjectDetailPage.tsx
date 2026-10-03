@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowLeft, ArrowUpRight, Github, ShoppingCart, GitBranch, Star } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Github, ShoppingCart } from 'lucide-react';
 import { useProject, useProjects } from '../hooks/useContent';
 import Markdown from 'react-markdown';
 import Mermaid from '../components/Mermaid';
@@ -9,22 +9,27 @@ export default function ProjectDetailPage() {
   const { slug } = useParams();
   const { project, loading } = useProject(slug);
   
-  // Special case for AI Project Planner Agent if not already in DB with correct flags
   const isFeatured = project?.featured;
 
-  console.log('ProjectDetailPage rendering. Project:', project?.title, 'Link:', project?.link);
-
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center text-zinc-500">Loading project...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center font-mono text-xs text-fg-subtle">
+        Loading engineering record...
+      </div>
+    );
   }
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center text-white">
+      <div className="min-h-screen flex items-center justify-center px-6">
         <div className="text-center">
-          <h1 className="text-4xl font-light mb-4">Project not found</h1>
-          <Link to="/projects" className="text-zinc-400 hover:text-white transition-colors">
-            Return to projects
+          <h1 className="text-2xl font-medium text-fg mb-2">Record Not Found</h1>
+          <p className="text-xs text-fg-muted mb-6">The requested engineering specification could not be located.</p>
+          <Link 
+            to="/projects" 
+            className="font-mono text-xs text-accent hover:underline"
+          >
+            ← Return to Engineering Records
           </Link>
         </div>
       </div>
@@ -32,95 +37,134 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <main className="pt-32 pb-24 px-6 max-w-4xl mx-auto min-h-screen">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <Link to="/projects" className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-emerald-400 transition-colors mb-12">
-          <ArrowLeft size={16} /> Back to projects
+    <main className="pt-24 pb-20 px-6 max-w-4xl mx-auto min-h-screen">
+      <div>
+        <Link 
+          to="/projects" 
+          className="inline-flex items-center gap-2 font-mono text-xs text-zinc-400 hover:text-emerald-400 transition-colors mb-8 font-medium"
+        >
+          <ArrowLeft size={14} /> Back to engineering records
         </Link>
 
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12">
-          <div className="max-w-2xl">
-            <div className="flex flex-wrap items-center gap-3 mb-4">
-              {isFeatured && (
-                <div className="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase tracking-[0.2em] rounded-full border border-emerald-500/20 flex items-center gap-2">
-                  <Star size={12} fill="currentColor" /> Featured Project
+        {/* Record Header */}
+        <div className="border-b border-zinc-800 pb-8 mb-8">
+          <div className="flex flex-wrap items-center gap-3 mb-4">
+            {isFeatured && (
+              <span className="font-mono text-xs uppercase tracking-widest text-emerald-400 px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/30 rounded font-semibold">
+                Featured System
+              </span>
+            )}
+            {project.projectType && (
+              <span className="font-mono text-xs text-zinc-400 uppercase tracking-wider">
+                {project.projectType}
+              </span>
+            )}
+            {project.domains && project.domains.length > 0 && (
+              <>
+                <span className="text-zinc-700">•</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {project.domains.map(d => (
+                    <span 
+                      key={d} 
+                      className="font-mono text-xs text-zinc-300 px-2 py-0.5 bg-zinc-900 border border-zinc-700 rounded"
+                    >
+                      {d}
+                    </span>
+                  ))}
                 </div>
-              )}
-              {project.projectType && (
-                <div className="text-xs font-mono text-zinc-500 tracking-wider uppercase">
-                  {project.projectType}
-                </div>
-              )}
-              {project.domains && project.domains.length > 0 && (
-                <>
-                  <span className="text-zinc-600">•</span>
-                  <div className="flex flex-wrap gap-2">
-                    {project.domains.map(d => (
-                      <span key={d} className="px-2 py-0.5 bg-emerald-500/10 text-emerald-400 text-[10px] uppercase tracking-wider rounded border border-emerald-500/20">{d}</span>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white mb-6 leading-[1.1]">
-              {project.title}
-            </h1>
-            <p className="text-lg md:text-xl text-zinc-400 font-light leading-relaxed">
-              {project.desc}
-            </p>
+              </>
+            )}
           </div>
-          
-          <div className="flex flex-wrap gap-4 shrink-0 w-full md:w-auto">
+
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+            {project.title}
+          </h1>
+          <p className="text-base text-slate-100 leading-relaxed max-w-3xl mb-6">
+            {project.desc}
+          </p>
+
+          <div className="flex flex-wrap gap-3">
             {project.link && project.link !== '#' && (
-              <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-emerald-400 transition-colors">
-                {project.type === 'premium' ? <ShoppingCart size={18} /> : <ArrowUpRight size={18} />}
-                {project.type === 'premium' ? `Purchase ${project.price || ''}` : 'Live Demo'}
+              <a 
+                href={project.link} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-zinc-950 hover:bg-emerald-400 hover:text-zinc-950 transition-colors rounded-md font-mono text-xs font-semibold shadow-sm"
+              >
+                {project.type === 'premium' ? <ShoppingCart size={14} /> : <ArrowUpRight size={14} />}
+                {project.type === 'premium' ? `Purchase ${project.price || ''}` : 'Live Endpoint / Demo'}
               </a>
             )}
             {project.github && (
-              <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-4 bg-zinc-900 border border-white/10 text-white rounded-full font-medium hover:bg-zinc-800 transition-colors">
-                <Github size={18} /> View Source
+              <a 
+                href={project.github} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="inline-flex items-center gap-1.5 px-4 py-2 bg-zinc-900 border border-zinc-700 text-white hover:border-emerald-400 hover:text-emerald-400 transition-colors rounded-md font-mono text-xs font-semibold"
+              >
+                <Github size={14} /> Source Repository
               </a>
             )}
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-3 mb-12">
-          {project.tech.map(t => (
-            <span key={t} className="px-4 py-1.5 bg-white/5 text-zinc-300 text-sm rounded-full border border-white/10">{t}</span>
-          ))}
+        {/* Tech Stack List */}
+        <div className="mb-8">
+          <div className="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-3 font-semibold">
+            Technologies & Libraries
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map(t => (
+              <span 
+                key={t} 
+                className="font-mono text-xs px-2.5 py-1 bg-zinc-900 text-zinc-200 border border-zinc-700 rounded"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
         </div>
 
+        {/* Architecture / Challenges / Metrics */}
         {(project.architecture || project.challenges || project.performance) && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
             {project.architecture && (
-              <div className="glass-panel rounded-2xl p-6">
-                <div className="text-xs font-mono text-emerald-400 uppercase tracking-wider mb-3">System Architecture</div>
-                <p className="text-zinc-400 text-sm leading-relaxed">{project.architecture}</p>
+              <div className="p-5 bg-zinc-900/80 border border-zinc-800 rounded-lg">
+                <div className="font-mono text-xs uppercase tracking-widest text-emerald-400 mb-2 font-semibold">
+                  System Architecture
+                </div>
+                <p className="text-sm text-slate-100 leading-relaxed">
+                  {project.architecture}
+                </p>
               </div>
             )}
             {project.challenges && (
-              <div className="glass-panel rounded-2xl p-6">
-                <div className="text-xs font-mono text-amber-400 uppercase tracking-wider mb-3">Key Challenges</div>
-                <p className="text-zinc-400 text-sm leading-relaxed">{project.challenges}</p>
+              <div className="p-5 bg-zinc-900/80 border border-zinc-800 rounded-lg">
+                <div className="font-mono text-xs uppercase tracking-widest text-emerald-400 mb-2 font-semibold">
+                  Key Challenges
+                </div>
+                <p className="text-sm text-slate-100 leading-relaxed">
+                  {project.challenges}
+                </p>
               </div>
             )}
             {project.performance && (
-              <div className="glass-panel rounded-2xl p-6">
-                <div className="text-xs font-mono text-blue-400 uppercase tracking-wider mb-3">Performance Metrics</div>
-                <p className="text-zinc-400 text-sm leading-relaxed">{project.performance}</p>
+              <div className="p-5 bg-zinc-900/80 border border-zinc-800 rounded-lg">
+                <div className="font-mono text-xs uppercase tracking-widest text-slate-200 mb-2 font-semibold">
+                  Performance Metrics
+                </div>
+                <p className="text-sm text-slate-100 leading-relaxed">
+                  {project.performance}
+                </p>
               </div>
             )}
           </div>
         )}
 
-        <div className="h-px bg-white/10 w-full mb-16"></div>
+        <div className="border-t border-zinc-800 my-8"></div>
 
-        <article className="prose prose-invert prose-zinc max-w-none prose-headings:font-medium prose-headings:tracking-tight prose-a:text-emerald-400 hover:prose-a:text-emerald-300 prose-pre:bg-white/[0.02] prose-pre:border prose-pre:border-white/10 mb-24">
+        {/* Specification Markdown */}
+        <article className="prose prose-invert max-w-none text-zinc-300 text-sm leading-relaxed prose-headings:text-white prose-headings:font-bold prose-headings:tracking-tight prose-a:text-emerald-400 hover:prose-a:underline prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-zinc-800 prose-code:font-mono prose-code:text-xs mb-16">
           <Markdown
             components={{
               code({ node, inline, className, children, ...props }: any) {
@@ -141,10 +185,10 @@ export default function ProjectDetailPage() {
         </article>
 
         {/* Project Navigation */}
-        <div className="border-t border-white/10 pt-12 flex flex-col sm:flex-row items-center justify-between gap-8">
+        <div className="border-t border-zinc-800 pt-8">
           <ProjectNav slug={slug} />
         </div>
-      </motion.div>
+      </div>
     </main>
   );
 }
@@ -159,44 +203,48 @@ function ProjectNav({ slug }: { slug: string | undefined }) {
   if (projects.length <= 1) return null;
 
   return (
-    <>
-      <div className="w-full sm:w-1/2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
         {prevProject ? (
           <Link 
             to={`/projects/${prevProject.slug}`}
-            className="group flex flex-col items-start gap-2 p-6 rounded-3xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10"
+            className="block p-4 bg-zinc-900/80 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-colors group"
           >
-            <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Previous Project</span>
-            <div className="flex items-center gap-2 text-white group-hover:text-emerald-400 transition-colors">
-              <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-              <span className="text-lg font-medium truncate max-w-[200px]">{prevProject.title}</span>
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 block mb-1">
+              Previous Record
+            </span>
+            <div className="flex items-center gap-2 text-sm font-medium text-white group-hover:text-emerald-400 transition-colors">
+              <ArrowLeft size={14} className="shrink-0" />
+              <span className="truncate">{prevProject.title}</span>
             </div>
           </Link>
         ) : (
-          <div className="p-6 opacity-20 grayscale">
-            <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">End of list</span>
+          <div className="p-4 border border-zinc-800/50 rounded-lg opacity-40">
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">Beginning of records</span>
           </div>
         )}
       </div>
 
-      <div className="w-full sm:w-1/2 flex justify-end">
+      <div>
         {nextProject ? (
           <Link 
             to={`/projects/${nextProject.slug}`}
-            className="group flex flex-col items-end gap-2 p-6 rounded-3xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10 text-right"
+            className="block p-4 bg-zinc-900/80 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-colors group text-right"
           >
-            <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">Next Project</span>
-            <div className="flex items-center gap-2 text-white group-hover:text-emerald-400 transition-colors">
-              <span className="text-lg font-medium truncate max-w-[200px]">{nextProject.title}</span>
-              <ArrowUpRight size={16} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 block mb-1">
+              Next Record
+            </span>
+            <div className="flex items-center justify-end gap-2 text-sm font-medium text-white group-hover:text-emerald-400 transition-colors">
+              <span className="truncate">{nextProject.title}</span>
+              <ArrowUpRight size={14} className="shrink-0" />
             </div>
           </Link>
         ) : (
-          <div className="p-6 opacity-20 grayscale text-right">
-            <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest">End of list</span>
+          <div className="p-4 border border-zinc-800/50 rounded-lg opacity-40 text-right">
+            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400">End of records</span>
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

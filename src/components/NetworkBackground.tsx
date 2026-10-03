@@ -179,8 +179,7 @@ export default function NetworkBackground() {
   return (
     <canvas 
       ref={canvasRef} 
-      className="absolute inset-0 z-0 pointer-events-none"
-      style={{ background: 'transparent' }} 
+      className="absolute inset-0 z-0 pointer-events-none bg-transparent"
     />
   );
 }

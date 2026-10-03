@@ -260,9 +260,9 @@ export const defaultEducation: Education[] = [
   {
     id: '1',
     degree: 'BSc in Applied Statistics',
-    institution: 'University of Cape Town',
+    institution: 'Higher Education / Tertiary Degree',
     period: '2019 - 2022',
-    description: 'Focused on statistical modeling, data analysis, and computational mathematics.',
+    description: 'Specialized in statistical modeling, computational data analysis, quantitative research methods, and probability theory.',
     icon: 'graduation-cap'
   }
 ];

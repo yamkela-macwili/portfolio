@@ -44,38 +44,38 @@ export default function ShareButton({ title, slug }: ShareButtonProps) {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs font-medium text-zinc-300 transition-all duration-200"
+        className="flex items-center gap-1.5 px-2.5 py-1 bg-surface-raised hover:bg-surface-hover border border-border hover:border-border-hover rounded font-mono text-xs text-fg-subtle hover:text-fg transition-colors"
       >
-        <Share2 size={14} />
+        <Share2 size={12} />
         <span>Share</span>
       </button>
 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            initial={{ opacity: 0, y: 4, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute right-0 mt-2 w-48 bg-zinc-900 border border-white/10 rounded-xl shadow-2xl z-50 overflow-hidden"
+            exit={{ opacity: 0, y: 4, scale: 0.98 }}
+            transition={{ duration: 0.15 }}
+            className="absolute right-0 mt-2 w-44 bg-surface border border-border rounded shadow-xl z-50 overflow-hidden"
           >
             <div className="p-1">
               <button
                 onClick={handleCopyLink}
-                className="w-full flex items-center gap-3 px-3 py-2 text-sm text-zinc-300 hover:bg-white/5 rounded-lg transition-colors text-left"
+                className="w-full flex items-center gap-2.5 px-3 py-1.5 font-mono text-xs text-fg-subtle hover:text-fg hover:bg-surface-raised rounded transition-colors text-left"
               >
                 {copied ? (
-                  <Check size={16} className="text-emerald-400" />
+                  <Check size={14} className="text-accent" />
                 ) : (
-                  <Link2 size={16} />
+                  <Link2 size={14} />
                 )}
-                <span>{copied ? 'Copied!' : 'Copy link'}</span>
+                <span>{copied ? 'Copied' : 'Copy link'}</span>
               </button>
               <button
                 onClick={handleLinkedInShare}
-                className="w-full flex items-center gap-3 px-3 py-2 text-sm text-zinc-300 hover:bg-white/5 rounded-lg transition-colors text-left"
+                className="w-full flex items-center gap-2.5 px-3 py-1.5 font-mono text-xs text-fg-subtle hover:text-fg hover:bg-surface-raised rounded transition-colors text-left"
               >
-                <Linkedin size={16} />
+                <Linkedin size={14} />
                 <span>LinkedIn</span>
               </button>
             </div>
