@@ -21,29 +21,29 @@ export default function Education() {
       {/* Section Header */}
       <div className="pb-8 mb-12 border-b border-border">
         <div className="font-mono text-xs uppercase tracking-widest text-accent font-semibold mb-2">
-          Credentials &amp; Academic Background
+          Education &amp; Credentials
         </div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-fg">
           Education &amp; Certifications
         </h2>
         <p className="text-sm sm:text-base text-fg-secondary max-w-2xl mt-2">
-          Formal academic training in quantitative statistics paired with industry-standard cloud and AI credentials.
+          Applied Statistics and software development education, alongside listed certifications and courses.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-        {/* Academic Degree Section */}
+        {/* Education */}
         <div className="lg:col-span-7 space-y-6">
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-fg-subtle font-semibold mb-2">
             <BookOpen size={14} className="text-accent" />
-            Undergraduate Degree
+            Education &amp; Training
           </div>
 
           {education.length > 0 ? (
             education.map((item, i) => (
               <div
                 key={item.id || i}
-                className="rounded-2xl bg-surface border border-border p-8 hover:border-border-hover transition-colors"
+                className="rounded-xl bg-surface border border-border p-6 hover:border-border-hover transition-colors"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 mb-4">
                   <div className="flex items-start gap-4">
@@ -69,18 +69,6 @@ export default function Education() {
                 <p className="text-sm sm:text-base text-fg-secondary leading-relaxed pl-0 sm:pl-16">
                   {item.description}
                 </p>
-
-                <div className="mt-6 pt-6 border-t border-border pl-0 sm:pl-16 flex flex-wrap gap-2 text-xs font-mono text-fg-subtle">
-                  <span className="px-2.5 py-1 rounded bg-base border border-border text-fg-muted">
-                    Statistical Modeling
-                  </span>
-                  <span className="px-2.5 py-1 rounded bg-base border border-border text-fg-muted">
-                    Probability Theory
-                  </span>
-                  <span className="px-2.5 py-1 rounded bg-base border border-border text-fg-muted">
-                    Computational Analysis
-                  </span>
-                </div>
               </div>
             ))
           ) : (
@@ -90,11 +78,11 @@ export default function Education() {
           )}
         </div>
 
-        {/* Professional Certifications List */}
+        {/* Certifications and courses */}
         <div className="lg:col-span-5 space-y-6">
           <div className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-fg-subtle font-semibold mb-2">
             <Award size={14} className="text-accent" />
-            Verified Certifications
+            Certifications &amp; Courses
           </div>
 
           <div className="space-y-4">
@@ -113,9 +101,13 @@ export default function Education() {
                       {cert.title}
                     </h4>
 
-                    <div className="flex items-center gap-2 font-mono text-xs text-fg-subtle">
-                      <span className="text-accent font-semibold">{cert.issuer}</span>
-                      <span>•</span>
+                    <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-fg-subtle">
+                      {cert.issuer && cert.issuer !== 'Professional Certification' && (
+                        <>
+                          <span className="text-accent font-semibold">{cert.issuer}</span>
+                          <span>•</span>
+                        </>
+                      )}
                       <span>{cert.date}</span>
                     </div>
 
@@ -126,7 +118,7 @@ export default function Education() {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1 font-mono text-xs text-fg-subtle hover:text-fg mt-2 transition-colors"
                       >
-                        Verify Credential <ExternalLink size={12} />
+                        Issuer Information <ExternalLink size={12} />
                       </a>
                     )}
                   </div>

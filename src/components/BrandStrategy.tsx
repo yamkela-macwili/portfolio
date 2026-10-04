@@ -14,8 +14,8 @@ export default function BrandStrategy() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card title="Brand Positioning">
           <p className="text-slate-300 leading-relaxed">
-            You are a <strong className="text-emerald-400">Full-Stack Software Engineer</strong> with deep expertise in backend systems, data pipelines, and AI engineering. 
-            You bridge the gap between complex data engineering and intuitive, high-performance web applications.
+            You are a <strong className="text-emerald-400">Software Engineer</strong> focused on Python, SQL, orchestration, and data quality.
+            Your Applied Statistics background helps you shape dependable pipelines and analysis-ready datasets.
           </p>
         </Card>
         
@@ -50,24 +50,24 @@ export default function BrandStrategy() {
         
         <Card>
           <h4 className="text-sm font-mono text-emerald-400 mb-2">SHORT (Twitter/LinkedIn Headline)</h4>
-          <p className="text-lg text-white font-medium">Full-Stack Software Engineer | Backend, Data & AI Systems</p>
+          <p className="text-lg text-white font-medium">Software Engineer | Data Engineering · Python · SQL</p>
         </Card>
 
         <Card>
           <h4 className="text-sm font-mono text-emerald-400 mb-2">MEDIUM (Conference Bio / About Section)</h4>
           <p className="text-slate-300 leading-relaxed">
-            I am a Full-Stack Software Engineer with a background in Applied Statistics. I specialize in building intelligent digital systems, from robust backends to AI-powered document retrieval (RAG), that help small and medium businesses automate their most tedious workflows.
+            I am a Software Engineer with a background in Applied Statistics. I focus on building reliable data pipelines, validating and transforming data, and preparing useful datasets for analytics.
           </p>
         </Card>
 
         <Card>
           <h4 className="text-sm font-mono text-emerald-400 mb-2">LONG (Website About Page)</h4>
           <p className="text-slate-300 leading-relaxed space-y-4">
-            <span>With a BSc in Applied Statistics and deep expertise in Python and Java, I approach software engineering through the lens of data. I don't just build websites; I build intelligent systems.</span>
+            <span>With a BSc in Applied Statistics, I approach data engineering with an emphasis on sound measurement, data quality, and clear analytical outcomes.</span>
             <br/><br/>
-            <span>My focus is on helping small and medium businesses (such as law firms and specialized retail) transform their operations. Whether it's a custom web platform, an automated data pipeline, or a sophisticated AI document retrieval system (RAG), my goal is to turn manual, document-heavy workflows into streamlined, automated processes.</span>
+            <span>My focus is on building workflows that turn raw source data into dependable, analysis-ready datasets through orchestration, validation, and SQL transformations.</span>
             <br/><br/>
-            <span>I believe that enterprise-grade AI shouldn't be restricted to Fortune 500 companies. I bring robust backend engineering and data intelligence to the businesses that form the backbone of our economy.</span>
+            <span>I also bring backend and application development experience to projects where it supports reliable data collection, delivery, and use.</span>
           </p>
         </Card>
       </div>

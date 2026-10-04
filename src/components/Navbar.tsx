@@ -62,7 +62,7 @@ export default function Navbar() {
                 Yamkela Macwili
               </span>
               <span className="hidden sm:inline text-[11px] font-mono text-fg-subtle">
-                Full-Stack Software Engineer
+                Software Engineer
               </span>
             </div>
           </Link>
@@ -88,13 +88,6 @@ export default function Navbar() {
                 </a>
               )
             ))}
-            <button
-              onClick={openCVModal}
-              className="px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-accent hover:bg-surface-raised transition-colors flex items-center gap-1"
-            >
-              <FileText size={12} />
-              <span>CV</span>
-            </button>
             {user && (
               <Link
                 to="/admin"
@@ -107,15 +100,6 @@ export default function Navbar() {
 
           {/* Right Action & Let's Talk CTA */}
           <div className="flex items-center gap-2.5">
-            <button
-              onClick={openCVModal}
-              className="hidden lg:inline-flex items-center gap-1 text-xs font-mono text-fg-muted hover:text-fg px-3.5 py-2 rounded-xl border border-border bg-surface hover:border-border-hover transition-colors"
-              title="Open Curriculum Vitae"
-            >
-              <FileText size={12} className="text-accent" />
-              <span>Resume</span>
-            </button>
-
             <a
               href="https://github.com/yamkela-macwili"
               target="_blank"

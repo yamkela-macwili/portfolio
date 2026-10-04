@@ -1,7 +1,6 @@
 {
-  "name": "Yamkela Macwili | Full-Stack Software Engineer",
-  "description": "Full-Stack Software Engineer specializing in backend systems, REST APIs, automated data engineering pipelines, and AI engineering.",
+  "name": "Yamkela Macwili | Software Engineer",
+  "description": "Software Engineer focused on data engineering, Python, SQL, Apache Airflow, data quality, and analytics-ready pipelines.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
-

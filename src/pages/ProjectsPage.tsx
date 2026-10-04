@@ -44,13 +44,13 @@ export default function ProjectsPage() {
       {/* Header */}
       <div className="pb-8 mb-8 border-b border-zinc-800/80">
         <div className="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold mb-1">
-          Index / Architecture Catalog
+          Index / Data & Software Projects
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">
-          Engineering Records & Systems
+          Data Engineering Projects
         </h1>
         <p className="text-sm sm:text-base text-slate-100 max-w-2xl leading-relaxed">
-          A registry of distributed backends, RESTful APIs, automated data pipelines, and intelligent agent workflows.
+          A collection of data pipelines, SQL transformations, data quality workflows, and supporting software projects.
         </p>
       </div>
 
@@ -174,7 +174,7 @@ export default function ProjectsPage() {
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
                       <span className="font-mono text-xs text-zinc-400 uppercase tracking-wider">
-                        {p.projectType || 'Backend System'}
+                        {p.projectType || 'Data Engineering Project'}
                       </span>
                       {p.featured && (
                         <span className="font-mono text-xs text-emerald-400 px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/30 rounded font-semibold">

@@ -24,6 +24,54 @@ const ProfileContext = createContext<ProfileContextType | undefined>(undefined);
 
 const STORAGE_KEY_IMAGE = 'ym_profile_image';
 const STORAGE_KEY_CV = 'ym_cv_profile_data_v3';
+const outdatedCertificationTitles = new Set([
+  'Certified in Cybersecurity (CC)',
+  'Data Science & Machine Learning Foundations',
+]);
+
+function loadCVData(): CVProfile {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY_CV);
+    if (!saved) return defaultCVData;
+
+    const profile = { ...defaultCVData, ...JSON.parse(saved) } as CVProfile;
+    const oldRoleTitles = new Set([
+      'Junior Data Engineer',
+      'Junior Software Engineer',
+      'Junior Backend Developer',
+      'Full-Stack Software Engineer',
+      'Backend Engineer',
+    ]);
+    const shouldUpdateRole = oldRoleTitles.has(profile.title);
+    const hasOutdatedCertifications = profile.certifications?.some((cert) => outdatedCertificationTitles.has(cert.title));
+
+    if (shouldUpdateRole) {
+      profile.title = defaultCVData.title;
+      profile.tagline = defaultCVData.tagline;
+      profile.summary = defaultCVData.summary;
+    }
+
+    if (hasOutdatedCertifications) {
+      const additionalCertifications = profile.certifications.filter(
+        (cert) => !outdatedCertificationTitles.has(cert.title)
+          && !defaultCVData.certifications.some((current) => current.title === cert.title),
+      );
+      profile.certifications = [...defaultCVData.certifications, ...additionalCertifications];
+    }
+
+    if (shouldUpdateRole || hasOutdatedCertifications) {
+      try {
+        localStorage.setItem(STORAGE_KEY_CV, JSON.stringify(profile));
+      } catch {
+        // Keep the migrated profile in memory if browser storage is unavailable.
+      }
+    }
+
+    return profile;
+  } catch {
+    return defaultCVData;
+  }
+}
 
 export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [profileImage, setProfileImage] = useState<string>(() => {
@@ -35,17 +83,7 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
     }
   });
 
-  const [cvData, setCvData] = useState<CVProfile>(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY_CV);
-      if (saved) {
-        return JSON.parse(saved);
-      }
-      return defaultCVData;
-    } catch {
-      return defaultCVData;
-    }
-  });
+  const [cvData, setCvData] = useState<CVProfile>(loadCVData);
 
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);

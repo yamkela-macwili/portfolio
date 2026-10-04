@@ -65,8 +65,8 @@ export interface CVProfile {
 
 export const defaultCVData: CVProfile = {
   name: 'YAMKELA MACWILI',
-  title: 'Junior Backend Developer',
-  tagline: 'Python & Java Backend Systems · RESTful APIs · Data-Driven Architecture',
+  title: 'Software Engineer',
+  tagline: 'Python · Java · SQL · Apache Airflow · Data Quality & Pipelines',
   location: 'Cape Town, South Africa',
   email: 'yamkela22y@gmail.com',
   phone: '+27 638595244',
@@ -75,8 +75,12 @@ export const defaultCVData: CVProfile = {
   website: 'https://macwili.co.za',
   profileImage: '/profile.jpg',
   summary:
-    'Junior Backend Developer with a strong foundation in Python and Java, focused on building scalable backend systems, APIs, and data driven applications. Passionate about intelligent automation, clean architecture, and solving real-world problems through code.',
+    'Software Engineer focused on data engineering: Python and SQL pipelines, orchestration, data quality, and analytics-ready modeling. I also use Java for application development. Grounded in Applied Statistics, I build dependable workflows that turn raw data into trusted datasets.',
   skills: [
+    {
+      category: 'Data Engineering',
+      items: ['Python', 'SQL', 'Apache Airflow', 'PostgreSQL', 'Great Expectations', 'ETL', 'Metabase'],
+    },
     {
       category: 'Languages',
       items: ['Python', 'Java', 'SQL'],
@@ -107,9 +111,22 @@ export const defaultCVData: CVProfile = {
   ],
   projects: [
     {
+      id: 'proj-data-pipeline',
+      title: 'Olist Customer Behavior Pipeline',
+      category: 'Data Engineering',
+      period: '2026',
+      tech: ['Apache Airflow 3', 'Python', 'SQL', 'PostgreSQL', 'Great Expectations', 'Metabase'],
+      highlights: [
+        'Built an orchestrated pipeline to ingest and transform Brazilian e-commerce data into analytics-ready models.',
+        'Added automated data quality checks and SQL transformations for customer behavior and RFM segmentation.',
+        'Prepared analytical outputs for Metabase dashboards.',
+      ],
+      github: 'https://github.com/yamkela-macwili/olist-customer-behavior-pipeline',
+    },
+    {
       id: 'proj-1',
       title: 'Job Intelligence Platform — Solo Project',
-      category: 'Solo Project',
+      category: 'Supporting Software Project',
       period: '2026',
       tech: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'Docker', 'Azure OpenAI'],
       highlights: [
@@ -157,17 +174,15 @@ export const defaultCVData: CVProfile = {
   certifications: [
     {
       id: 'cert-1',
-      title: 'Certified in Cybersecurity (CC)',
-      issuer: 'ISC2',
-      date: '2025',
-      link: 'https://www.isc2.org',
+      title: 'Azure Fundamentals',
+      issuer: 'Microsoft',
+      date: '2026',
     },
     {
       id: 'cert-2',
-      title: 'Data Science & Machine Learning Foundations',
-      issuer: 'Professional Certification',
-      date: '2024',
-      link: '#',
+      title: 'GenAI Course for Software Engineers',
+      issuer: 'WeThinkCode_',
+      date: '2026',
     },
   ],
 };

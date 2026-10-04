@@ -70,7 +70,7 @@ export default function ProjectIdeas() {
     <div className="space-y-8">
       <SectionHeader 
         title="10 Authority-Building Projects" 
-        description="Escalating in complexity, combining backend engineering, data, and AI."
+        description="Progressive project ideas centered on data engineering, with supporting software and applied AI projects."
         icon={Lightbulb}
       />
 

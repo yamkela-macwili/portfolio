@@ -1,34 +1,26 @@
-import { Code2, Database, Cpu, Server, ShieldCheck, Zap, Layers, BarChart2 } from 'lucide-react';
+import { Code2, Database, Cpu, Server, Zap, Layers } from 'lucide-react';
 
 export default function About() {
   const skillCategories = [
     {
-      label: 'Full-Stack & Frontend',
-      icon: Code2,
-      skills: ['React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML5', 'CSS3'],
-    },
-    {
-      label: 'Backend & APIs',
-      icon: Server,
-      skills: ['Python', 'FastAPI', 'Flask', 'Java', 'REST APIs', 'System Design'],
-    },
-    {
       label: 'Data Engineering',
       icon: Layers,
-      skills: [
-        'Apache Airflow 3',
-        'Metabase',
-        'pgAdmin 4',
-        'Great Expectations',
-        'ETL Pipelines',
-        'Data Quality Gates',
-        'SQL',
-      ],
+      skills: ['Apache Airflow 3', 'Python', 'SQL', 'ETL Pipelines', 'Great Expectations', 'Data Quality', 'Metabase'],
     },
     {
       label: 'Databases & Storage',
       icon: Database,
       skills: ['PostgreSQL', 'MySQL', 'SQLite', 'Redis'],
+    },
+    {
+      label: 'Backend & APIs',
+      icon: Server,
+      skills: ['FastAPI', 'Flask', 'Java', 'REST APIs', 'System Design'],
+    },
+    {
+      label: 'Supporting Software',
+      icon: Code2,
+      skills: ['React', 'TypeScript', 'JavaScript', 'Tailwind CSS', 'HTML5', 'CSS3'],
     },
     {
       label: 'AI & Machine Learning',
@@ -48,29 +40,6 @@ export default function About() {
     },
   ];
 
-  const architecturalPrinciples = [
-    {
-      title: 'Data Integrity by Design',
-      desc: 'Enforcing deterministic validations, automated schema checks, and referential integrity to prevent silent data anomalies.',
-      icon: ShieldCheck,
-    },
-    {
-      title: 'Strict Type Safety & Contracts',
-      desc: 'Building tight contracts between FastAPI REST endpoints and TypeScript React interfaces with comprehensive schema models.',
-      icon: Code2,
-    },
-    {
-      title: 'Idempotent Orchestration',
-      desc: 'Designing DAGs and batch workers with safe retry patterns, atomic transactions, and zero duplicate states.',
-      icon: Layers,
-    },
-    {
-      title: 'Low Latency & Caching',
-      desc: 'Optimizing database queries, using Redis for key-value deduplication, and sub-2s response times on AI workloads.',
-      icon: BarChart2,
-    },
-  ];
-
   return (
     <section id="about" className="py-20 sm:py-28 px-6 max-w-6xl mx-auto scroll-mt-20">
       {/* Section Header */}
@@ -82,66 +51,32 @@ export default function About() {
           Background &amp; Technical Core
         </h2>
         <p className="text-sm sm:text-base text-fg-secondary max-w-2xl mt-2">
-          Bridging mathematical rigor, statistical foundations, and real-world software engineering.
+          Applying statistical foundations to build dependable data pipelines and useful analytical datasets.
         </p>
       </div>
 
       <div className="space-y-10">
-        {/* Bento Top Row: Summary & Principles */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Main Profile Summary Card */}
-          <div className="lg:col-span-7 rounded-2xl bg-surface border border-border p-8 flex flex-col justify-between">
-            <div>
-              <div className="font-mono text-xs font-semibold uppercase tracking-wider text-accent mb-4">
-                Engineering Philosophy
-              </div>
-              <h3 className="text-xl sm:text-2xl font-bold text-fg mb-4 leading-snug">
-                Building reliable software where backend resilience meets clean user experiences.
-              </h3>
-              <p className="text-sm sm:text-base text-fg-secondary leading-relaxed mb-4">
-                I am a Full-Stack Software Engineer based in Cape Town, specializing in reliable server-side systems, RESTful API development, relational database modeling, automated data engineering pipelines, and modern web applications.
-              </p>
-              <p className="text-sm sm:text-base text-fg-secondary leading-relaxed">
-                With academic grounding in Applied Statistics, I build end-to-end software systems with a disciplined focus on data integrity, deterministic processing, and clean architectural boundaries. I bridge complex backend logic and data workflows with intuitive, type-safe user interfaces, prioritizing code maintainability and defensive error handling over trendy abstractions.
-              </p>
-            </div>
-
-            <div className="pt-6 mt-6 border-t border-border flex flex-wrap items-center gap-6 text-xs font-mono text-fg-subtle">
-              <div>
-                <span className="text-fg-subtle">Location:</span> <span className="text-fg font-medium">Cape Town, ZA</span>
-              </div>
-              <div>
-                <span className="text-fg-subtle">Academic:</span> <span className="text-accent font-medium">BSc in Applied Statistics</span>
-              </div>
-              <div>
-                <span className="text-fg-subtle">Focus:</span> <span className="text-fg font-medium">Full-Stack &amp; Data</span>
-              </div>
-            </div>
+        <div className="rounded-2xl bg-surface border border-border p-8">
+          <div className="font-mono text-xs font-semibold uppercase tracking-wider text-accent mb-3">
+            Profile
           </div>
+          <p className="text-sm sm:text-base text-fg-secondary leading-relaxed mb-4">
+            I am a Software Engineer based in Cape Town, focused on data engineering: Python and SQL pipelines, orchestration, data quality, and analytics-ready modeling. My Applied Statistics background helps me connect sound data processing with the questions teams need to answer.
+          </p>
+          <p className="text-sm sm:text-base text-fg-secondary leading-relaxed">
+            I work across ingestion, validation, transformation, and reporting, with attention to reliable reruns, clear data models, and traceable quality checks. I also use backend and application development to support data products where they are needed.
+          </p>
 
-          {/* Core Principles 2x2 Grid */}
-          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {architecturalPrinciples.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={item.title}
-                  className="rounded-2xl bg-surface border border-border p-5 flex flex-col justify-between hover:border-border-hover transition-colors"
-                >
-                  <div className="w-9 h-9 rounded-xl bg-surface-raised border border-border flex items-center justify-center text-accent mb-3 shadow-sm">
-                    <Icon size={18} />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-fg mb-1.5 leading-snug">
-                      {item.title}
-                    </h4>
-                    <p className="text-xs text-fg-secondary leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+          <div className="pt-6 mt-6 border-t border-border flex flex-wrap items-center gap-6 text-xs font-mono text-fg-subtle">
+            <div>
+              <span className="text-fg-subtle">Location:</span> <span className="text-fg font-medium">Cape Town, South Africa</span>
+            </div>
+            <div>
+              <span className="text-fg-subtle">Academic:</span> <span className="text-accent font-medium">BSc in Applied Statistics</span>
+            </div>
+            <div>
+              <span className="text-fg-subtle">Focus:</span> <span className="text-fg font-medium">Data Engineering</span>
+            </div>
           </div>
         </div>
 
@@ -156,12 +91,9 @@ export default function About() {
                 Stack &amp; Technologies by Domain
               </h3>
             </div>
-            <div className="text-xs font-mono text-fg-subtle">
-              Production Tested &amp; Actively Maintained
-            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {skillCategories.map((cat) => {
               const Icon = cat.icon;
               return (

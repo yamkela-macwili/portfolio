@@ -290,7 +290,15 @@ export function useCertifications() {
         if (error || !data || data.length === 0) {
           setCertifications(defaultCertifications);
         } else {
-          setCertifications(data);
+          const replacedTitles = new Set([
+            'Certified in Cybersecurity (CC)',
+            'Data Science & Machine Learning Foundations',
+            ...defaultCertifications.map((certification) => certification.title),
+          ]);
+          const additionalCertifications = data.filter(
+            (certification: Certification) => !replacedTitles.has(certification.title),
+          );
+          setCertifications([...defaultCertifications, ...additionalCertifications]);
         }
       } catch {
         setCertifications(defaultCertifications);

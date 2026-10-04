@@ -6,19 +6,19 @@ export default function Roadmap() {
   const phases = [
     {
       title: "Phase 1: Foundations (Months 1-6)",
-      focus: "Web & Backend Mastery",
-      skills: ["Advanced Python", "Java Basics", "SQL", "FastAPI", "React Basics"],
-      projects: ["Portfolio Website", "Hardware Store Inventory Scraper"],
-      tools: ["Git", "Postman", "Tailwind CSS"],
-      milestone: "Launch portfolio, land first R50k web project."
+      focus: "Data Engineering Foundations",
+      skills: ["Python", "SQL", "Data Modeling", "Pipeline Design", "Data Quality"],
+      projects: ["Olist Customer Behavior Pipeline", "Data Quality Workflow"],
+      tools: ["Apache Airflow", "PostgreSQL", "Great Expectations"],
+      milestone: "Build and document dependable, analytics-ready data workflows."
     },
     {
       title: "Phase 2: Data & Automation (Months 7-12)",
-      focus: "Pipelines & Infrastructure",
-      skills: ["Data Engineering", "Docker", "CI/CD", "Web Scraping"],
-      projects: ["Automated Invoice Extractor", "Data Pipeline for Sales"],
-      tools: ["Docker", "GitHub Actions", "BeautifulSoup/Selenium"],
-      milestone: "Secure first R20k/mo automation retainer."
+      focus: "Orchestration & Infrastructure",
+      skills: ["Workflow Orchestration", "Data Quality", "SQL Modeling", "Pipeline Monitoring"],
+      projects: ["Automated Ingestion Pipeline", "Analytics Data Mart"],
+      tools: ["Apache Airflow", "Docker", "GitHub Actions"],
+      milestone: "Extend pipeline projects with monitoring, documentation, and safe reruns."
     },
     {
       title: "Phase 3: AI Systems & RAG (Months 13-18)",

@@ -5,14 +5,14 @@ export const posts: BlogPost[] = [
     id: 'b2',
     slug: 'building-an-end-to-end-data-pipeline-with-airflow-and-postgres',
     title: 'Building an End-to-End Data Pipeline with Apache Airflow, PostgreSQL, and Great Expectations',
-    excerpt: 'A deep dive into architecting a production-grade data pipeline for Brazilian e-commerce data, covering automated ingestion, data quality gates, and RFM customer segmentation.',
+    excerpt: 'A walkthrough of an automated data pipeline for Brazilian e-commerce data, covering ingestion, data quality checks, and RFM customer segmentation.',
     date: '2026-04-15',
     readTime: '10 min read',
     category: 'Data Engineering',
     featured: true,
     content: `## Why E-Commerce Pipelines Require Strict Data Quality
 
-When processing hundreds of thousands of customer orders across disparate services, data pipeline reliability is paramount. The Olist Brazilian E-Commerce dataset provides a realistic transactional landscape: distributed order timestamps, variable freight calculations, multiple payment installments, and customer geographic dispersion.
+The Olist Brazilian E-Commerce dataset contains related order, customer, payment, and product records. Bringing those records together reliably is essential for useful downstream analysis.
 
 Without strict data quality gates and disciplined orchestration, downstream analytics suffer from silent data anomalies, orphaned order items, and skewed financial metrics.
 
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     domains: ['Full-Stack', 'AI Engineering', 'NLP', 'APIs'],
     desc: 'Full-stack AI platform that analyzes CVs against job descriptions, computes match alignment, identifies skill gaps, and generates structured learning roadmaps with an interactive React frontend.',
     problem: 'Job seekers often struggle to understand how well their CV matches a specific role. Most applications provide no actionable feedback, making it difficult to identify concrete skill gaps or know what to learn next.',
-    solution: 'Architected and built a complete full-stack platform featuring a responsive React frontend, a high-performance FastAPI backend with NLP extraction routines, and Azure OpenAI integration to compare unstructured CV text with job specifications, calculate alignment scores, and generate custom skill roadmaps.',
+    solution: 'Built a full-stack platform with a React frontend, a FastAPI backend with NLP extraction routines, and Azure OpenAI integration to compare CV text with job specifications, calculate alignment scores, and generate skill roadmaps.',
     impact: 'Empowers users to make structured career decisions by identifying skill gaps and next steps with customized learning paths.',
     tech: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'TypeScript', 'Azure OpenAI', 'Tailwind CSS'],
     architecture: 'Client-Server architecture with React SPA communicating via REST APIs to a containerized FastAPI backend, leveraging Azure OpenAI and PostgreSQL.',
@@ -131,7 +131,7 @@ export const projects: Project[] = [
     desc: 'End-to-end data pipeline based on the Olist Brazilian E-Commerce dataset featuring automated ingestion, data quality checks, SQL transformations, RFM customer behavior feature engineering, and an interactive Metabase dashboard.',
     problem: 'Raw e-commerce transaction data across distributed order, customer, and payment tables is unstructured for analytics, prone to silent data quality anomalies, and lacks automated segmentation for customer behavior insights.',
     solution: 'Engineered an automated end-to-end data pipeline using Apache Airflow 3 for orchestration, Great Expectations for automated schema and quality assertions, robust SQL transformations in PostgreSQL, and RFM (Recency, Frequency, Monetary) feature engineering to feed an interactive Metabase analytical dashboard.',
-    impact: 'Automated daily pipeline execution with automated data quality gates, structured metric preparation, and customer lifecycle segmentation.',
+    impact: 'Automates ingestion, data quality checks, SQL transformations, and customer lifecycle segmentation for analysis.',
     tech: ['Apache Airflow 3', 'PostgreSQL', 'Python', 'SQL', 'Great Expectations', 'Metabase'],
     architecture: 'Airflow 3 DAG orchestrates ingestion tasks, triggers Great Expectations quality validations, executes staged PostgreSQL SQL transformations, computes RFM scores, and feeds Metabase dashboards.',
     challenges: 'Handling complex transaction relationships across multiple tables, ensuring strict data quality thresholds, and designing efficient SQL aggregations for RFM scoring.',
@@ -236,30 +236,28 @@ export const defaultEducation: Education[] = [
     degree: 'Software Development Programme',
     institution: 'WeThinkCode_',
     period: 'Present',
-    description: 'WeThinkCode_, Cape Town, South Africa — Software engineering, object-oriented systems, Python, Java, agile methodologies, and scalable backend design.',
+    description: 'Software development training covering object-oriented programming, Python, Java, and collaborative engineering practices.',
   },
   {
     id: 'edu-2',
     degree: 'Bachelor of Science',
     institution: 'Walter Sisulu University',
     period: '2023',
-    description: 'Walter Sisulu University, Eastern Cape, South Africa — Mathematical, computational, and scientific foundations focusing on analytical problem-solving.',
+    description: 'Mathematical, computational, and scientific foundations with a focus on analytical problem-solving.',
   },
 ];
 
 export const defaultCertifications: Certification[] = [
   {
     id: 'cert-1',
-    title: 'Certified in Cybersecurity (CC)',
-    issuer: 'ISC2',
-    date: '2025',
-    link: 'https://www.isc2.org',
+    title: 'Azure Fundamentals',
+    issuer: 'Microsoft',
+    date: '2026',
   },
   {
     id: 'cert-2',
-    title: 'Data Science & Machine Learning Foundations',
-    issuer: 'Professional Certification',
-    date: '2024',
-    link: '#',
+    title: 'GenAI Course for Software Engineers',
+    issuer: 'WeThinkCode_',
+    date: '2026',
   },
 ];

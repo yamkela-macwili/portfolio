@@ -62,10 +62,10 @@ export default function Contact() {
           Direct Communication
         </div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-fg">
-          Let's Build Something Resilient
+          Let's Build Reliable Data Workflows
         </h2>
         <p className="text-sm sm:text-base text-fg-secondary max-w-2xl mt-2">
-          Have an opening for a full-stack engineer, a complex backend challenge, or an automated data pipeline project? Reach out directly.
+          Have a Software Engineering opportunity focused on data, or a project that needs reliable data workflows? Reach out directly.
         </p>
       </div>
 
@@ -83,7 +83,7 @@ export default function Contact() {
               </h3>
 
               <p className="text-sm text-fg-secondary leading-relaxed mb-6">
-                Based in Cape Town, South Africa (UTC+2). Available for full-time roles, engineering contracts, and remote collaborations globally.
+                Based in Cape Town, South Africa (UTC+2). Available for full-time software engineering roles, contracts, and remote collaborations.
               </p>
 
               {/* One-Click Copy Email Card */}
@@ -219,7 +219,7 @@ export default function Contact() {
                   className={`w-full px-4 py-3 bg-base border text-sm text-fg rounded-xl focus:outline-none transition-colors placeholder:text-fg-subtle ${
                     errors.subject ? 'border-danger focus:border-danger' : 'border-border focus:border-accent'
                   }`}
-                  placeholder="Full-Stack Engineering Role / Technical Collaboration"
+                  placeholder="Software Engineering Role / Data Project"
                 />
                 {errors.subject && (
                   <p className="text-danger font-mono text-xs flex items-center gap-1 mt-1">

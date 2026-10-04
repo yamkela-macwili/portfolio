@@ -11,11 +11,11 @@ export default function OpenToWork() {
             </div>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-fg tracking-tight mb-3">
-              Open to Full-Stack, Backend &amp; Data Engineering Roles
+              Open to Software Engineering Roles
             </h2>
 
             <p className="text-sm sm:text-base text-fg-secondary leading-relaxed mb-4">
-              Actively exploring engineering opportunities focused on production full-stack web apps, resilient backend services, RESTful APIs, relational database modeling, and automated data pipelines. Available for remote and hybrid positions worldwide.
+              Seeking software engineering opportunities focused on data pipelines, automated quality checks, SQL modeling, and analytics-ready datasets. Available for remote and hybrid positions worldwide.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-fg-muted">

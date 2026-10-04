@@ -28,10 +28,10 @@ export default function BlogPage() {
           Index / Technical Writing
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">
-          Engineering Notes & System Design
+          Data Engineering Notes
         </h1>
         <p className="text-sm sm:text-base text-slate-100 max-w-2xl leading-relaxed mb-6">
-          Technical breakdowns, database performance tuning, distributed consensus explorations, and backend architectures.
+          Notes on data pipelines, orchestration, data quality, SQL modeling, and the lessons learned while building them.
         </p>
 
         {/* Search Bar */}

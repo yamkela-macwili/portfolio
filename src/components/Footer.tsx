@@ -11,7 +11,7 @@ export default function Footer() {
         <div className="flex flex-wrap items-center gap-3">
           <p className="text-fg-secondary">© {new Date().getFullYear()} Yamkela Macwili</p>
           <span className="text-border-hover">•</span>
-          <span className="text-accent font-semibold">Full-Stack Software Engineer</span>
+          <span className="text-accent font-semibold">Software Engineer · Data Engineering</span>
           <span className="text-border-hover">•</span>
           <span className="text-fg-subtle">Cape Town, ZA</span>
         </div>

@@ -41,17 +41,17 @@ export default function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose
       case 'whoami':
         newHistory.push({ 
           type: 'output', 
-          content: 'Yamkela Macwili\nFull-Stack Software Engineer\nSpecializing in Scalable Backends, Data Engineering Pipelines, and AI Systems.' 
+          content: 'Yamkela Macwili\nSoftware Engineer\nFocused on Python, SQL, Apache Airflow, data quality, and analytics-ready pipelines.'
         });
         break;
       case 'stack':
         newHistory.push({ 
           type: 'output', 
           content: `CORE STACK:
-  Frontend:       React, TypeScript, JavaScript, Tailwind CSS, HTML, CSS
-  Backend:        Python (FastAPI, Flask), REST APIs
+  Data Engineering: Apache Airflow 3, Python, SQL, Great Expectations, ETL, Metabase
+  Backend:        FastAPI, Flask, REST APIs
+  Supporting UI:  React, TypeScript, JavaScript, Tailwind CSS
   Languages:      Python, Java, TypeScript, JavaScript, SQL
-  Data Eng:       Apache Airflow 3, Metabase, pgAdmin 4, Great Expectations, ETL
   AI Eng:         Azure OpenAI, OpenAI API, LangChain, RAG Systems
   Databases:      PostgreSQL, MySQL, SQLite
   DevOps & Tools: Docker, Git, Vercel, Linux` 

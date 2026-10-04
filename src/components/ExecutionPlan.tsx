@@ -20,7 +20,7 @@ export default function ExecutionPlan() {
               <ul className="space-y-3">
                 <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Buy domain (e.g., yournamesystems.com).</li>
                 <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Build V1 of portfolio using React/Tailwind.</li>
-                <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Update LinkedIn headline to "Full-Stack Software Engineer | Backend · Data · AI".</li>
+                <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Position the LinkedIn headline around Software Engineering and data systems.</li>
               </ul>
             </div>
             <div>
@@ -38,11 +38,11 @@ export default function ExecutionPlan() {
           <h3 className="text-xl font-bold text-white mb-4">First 90 Days: Authority & Outreach</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h4 className="text-sm font-mono text-slate-400 mb-3">MONTH 2: BACKEND MASTERY</h4>
+              <h4 className="text-sm font-mono text-slate-400 mb-3">MONTH 2: DATA PIPELINES</h4>
               <ul className="space-y-3">
-                <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Deep dive into FastAPI and PostgreSQL.</li>
-                <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Build Project #3 (SMB Booking API).</li>
-                <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Write 2 blog posts on portfolio about data automation.</li>
+                <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Strengthen SQL modeling and PostgreSQL skills.</li>
+                <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Build an orchestrated pipeline with automated validation.</li>
+                <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Write about data quality and pipeline design.</li>
               </ul>
             </div>
             <div>
@@ -59,7 +59,7 @@ export default function ExecutionPlan() {
         <Card className="border-l-4 border-l-emerald-500">
           <h3 className="text-xl font-bold text-white mb-4">First 6 Months: The AI Transition</h3>
           <div className="space-y-4">
-            <p className="text-slate-300">By month 6, you should have 1-2 freelance clients under your belt and a solid grasp of backend engineering. Now, pivot hard into AI.</p>
+            <p className="text-slate-300">Build depth in data engineering by extending pipeline projects with reliable orchestration, validation, and analytics-ready models.</p>
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Learn Vector Databases (pgvector) and Embeddings.</li>
               <li className="flex items-start gap-2 text-sm text-slate-300"><CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5"/> Build Project #5 (Legal Contract Summarizer).</li>

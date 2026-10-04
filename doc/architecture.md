@@ -1,6 +1,6 @@
 # Architecture Overview
 
-This project is a modern, responsive portfolio website built with React, TypeScript, and Tailwind CSS for a Backend Engineer. It emphasizes a clean, minimalist aesthetic with interactive elements and smooth animations.
+This portfolio is built with React, TypeScript, and Tailwind CSS to present software engineering work focused on data engineering, technical projects, and professional information.
 
 ## Tech Stack
 

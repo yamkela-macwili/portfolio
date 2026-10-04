@@ -19,7 +19,7 @@ export default function Blog() {
             Technical Writing &amp; Case Studies
           </h2>
           <p className="text-sm sm:text-base text-fg-secondary max-w-2xl mt-2">
-            Architectural teardowns, data pipeline deep dives, and lessons from building production systems.
+            Notes on data pipelines, quality checks, SQL transformations, and applied statistics.
           </p>
         </div>
 
