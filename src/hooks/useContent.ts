@@ -1,81 +1,73 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { Project, BlogPost, Education, Certification, Skill } from '../types';
-import { defaultSkills, defaultEducation, projects as defaultProjects, posts as defaultPosts, defaultCertifications } from '../data';
+import {
+  defaultSkills,
+  defaultEducation,
+  projects as defaultProjects,
+  posts as defaultPosts,
+  defaultCertifications,
+} from '../data';
 
 export function useProjects() {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [projects, setProjects] = useState<Project[]>(defaultProjects);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchProjects() {
+      if (!supabase) {
+        setProjects(defaultProjects);
+        setLoading(false);
+        return;
+      }
+
       try {
-        if (!supabase) {
-          console.log('Supabase client not initialized');
+        const { data, error: dbError } = await supabase.from('projects').select('*');
+
+        if (dbError) {
+          console.warn('Supabase query returned error, using fallback data:', dbError.message);
           setProjects(defaultProjects);
-          setLoading(false);
           return;
         }
 
-        const { data, error } = await supabase
-          .from('projects')
-          .select('*');
-
-        if (error) throw error;
-
         if (data && data.length > 0) {
-          console.log('Raw data from Supabase:', data);
-          
-          // Map snake_case to camelCase and provide fallbacks for new fields
           const mappedProjects = data.map((p: any) => {
             const dbSlug = (p.slug || '').trim().toLowerCase();
-            const defaultProj = defaultProjects.find(dp => (dp.slug || '').trim().toLowerCase() === dbSlug);
-            
-            if (!defaultProj) {
-              console.warn(`No default project found for slug: "${dbSlug}". Available default slugs:`, defaultProjects.map(dp => dp.slug));
-            } else {
-              console.log(`Matched project: ${dbSlug}`, {
-                dbProblem: p.problem,
-                defaultProblem: defaultProj.problem
-              });
-            }
+            const defaultProj = defaultProjects.find(
+              (dp) => (dp.slug || '').trim().toLowerCase() === dbSlug
+            );
 
             return {
               ...p,
-              // Ensure we have values for the new fields, prioritizing DB then local data
               problem: p.problem || defaultProj?.problem || 'Problem description pending...',
               solution: p.solution || defaultProj?.solution || 'Solution details pending...',
               impact: p.impact || defaultProj?.impact || 'Impact statement pending...',
-              
-              // Standard mapping
               projectType: p.projectType || p.project_type || defaultProj?.projectType || 'Personal Project',
               tech: p.tech || defaultProj?.tech || [],
-              featured: p.featured !== null && p.featured !== undefined ? p.featured : (defaultProj?.featured ?? false),
+              featured:
+                p.featured !== null && p.featured !== undefined ? p.featured : (defaultProj?.featured ?? false),
               github: p.github || defaultProj?.github || '',
               link: p.link || defaultProj?.link || '',
               desc: p.desc || defaultProj?.desc || '',
-              category: p.category || defaultProj?.category || 'Development'
+              category: p.category || defaultProj?.category || 'Development',
             };
           });
 
-          console.log('Final mapped projects:', mappedProjects);
-
-          const dbProjects = mappedProjects.sort((a: any, b: any) => {
+          const sortedProjects = mappedProjects.sort((a: any, b: any) => {
             if (a.created_at && b.created_at) {
               return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
             }
             return 0;
           });
 
-          setProjects(dbProjects);
+          setProjects(sortedProjects);
         } else {
           setProjects(defaultProjects);
         }
       } catch (err: any) {
-        console.error('Error fetching projects from Supabase:', err);
+        console.warn('Supabase connection unavailable, using local project data.');
         setProjects(defaultProjects);
-        setError(err.message || 'Failed to connect to database');
       } finally {
         setLoading(false);
       }
@@ -88,27 +80,28 @@ export function useProjects() {
 }
 
 export function usePosts() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [posts, setPosts] = useState<BlogPost[]>(defaultPosts);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchPosts() {
+      if (!supabase) {
+        setPosts(defaultPosts);
+        setLoading(false);
+        return;
+      }
+
       try {
-        if (!supabase) {
+        const { data, error: dbError } = await supabase.from('posts').select('*');
+
+        if (dbError) {
+          console.warn('Supabase query returned error, using fallback posts:', dbError.message);
           setPosts(defaultPosts);
-          setLoading(false);
           return;
         }
 
-        const { data, error } = await supabase
-          .from('posts')
-          .select('*');
-
-        if (error) throw error;
-
         if (data && data.length > 0) {
-          // Map snake_case to camelCase if needed and sort
           const mappedPosts = data.map((p: any) => ({
             ...p,
             readTime: p.readTime || p.read_time,
@@ -123,9 +116,8 @@ export function usePosts() {
           setPosts(defaultPosts);
         }
       } catch (err: any) {
-        console.error('Error fetching posts:', err);
+        console.warn('Supabase connection unavailable, using local blog posts.');
         setPosts(defaultPosts);
-        setError(err.message || 'Failed to connect to database');
       } finally {
         setLoading(false);
       }
@@ -138,40 +130,36 @@ export function usePosts() {
 }
 
 export function useProject(slug: string | undefined) {
-  const [project, setProject] = useState<Project | null>(null);
+  const [project, setProject] = useState<Project | null>(() => {
+    if (!slug) return null;
+    return defaultProjects.find((p) => p.slug === slug) || null;
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchProject() {
-      if (!slug) return;
-      
+      if (!slug) {
+        setLoading(false);
+        return;
+      }
+
+      const localProject = defaultProjects.find((p) => p.slug === slug) || null;
+
+      if (!supabase) {
+        setProject(localProject);
+        setLoading(false);
+        return;
+      }
+
       try {
-        if (!supabase) {
-          const localProject = defaultProjects.find(p => p.slug === slug);
-          setProject(localProject || null);
-          setLoading(false);
-          return;
-        }
+        const { data, error } = await supabase.from('projects').select('*').eq('slug', slug).single();
 
-        const { data, error } = await supabase
-          .from('projects')
-          .select('*')
-          .eq('slug', slug)
-          .single();
-
-        if (error) {
-          if (error.code === 'PGRST116') {
-            console.log(`Project ${slug} not found in Supabase`);
-            const localProject = defaultProjects.find(p => p.slug === slug);
-            setProject(localProject || null);
-          } else {
-            console.error(`Supabase error fetching project ${slug}:`, error);
-            throw error;
-          }
-        } else if (data) {
+        if (error || !data) {
+          setProject(localProject);
+        } else {
           const dbSlug = (slug || '').trim().toLowerCase();
-          const defaultProj = defaultProjects.find(dp => (dp.slug || '').trim().toLowerCase() === dbSlug);
-          
+          const defaultProj = defaultProjects.find((dp) => (dp.slug || '').trim().toLowerCase() === dbSlug);
+
           const mappedProject = {
             ...data,
             problem: data.problem || defaultProj?.problem || 'Problem description pending...',
@@ -182,17 +170,12 @@ export function useProject(slug: string | undefined) {
             github: data.github || defaultProj?.github || '',
             link: data.link || defaultProj?.link || '',
             desc: data.desc || defaultProj?.desc || '',
-            category: data.category || defaultProj?.category || 'Development'
+            category: data.category || defaultProj?.category || 'Development',
           };
-          console.log(`Fetched single project ${dbSlug}:`, mappedProject);
           setProject(mappedProject);
-          setLoading(false);
-          return;
         }
-      } catch (err) {
-        console.error('Error fetching project from Supabase:', err);
-        const localProject = defaultProjects.find(p => p.slug === slug);
-        setProject(localProject || null);
+      } catch {
+        setProject(localProject);
       } finally {
         setLoading(false);
       }
@@ -205,45 +188,40 @@ export function useProject(slug: string | undefined) {
 }
 
 export function usePost(slug: string | undefined) {
-  const [post, setPost] = useState<BlogPost | null>(null);
+  const [post, setPost] = useState<BlogPost | null>(() => {
+    if (!slug) return null;
+    return defaultPosts.find((p) => p.slug === slug) || null;
+  });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchPost() {
-      if (!slug) return;
+      if (!slug) {
+        setLoading(false);
+        return;
+      }
+
+      const localPost = defaultPosts.find((p) => p.slug === slug) || null;
+
+      if (!supabase) {
+        setPost(localPost);
+        setLoading(false);
+        return;
+      }
 
       try {
-        if (!supabase) {
-          const localPost = defaultPosts.find(p => p.slug === slug);
-          setPost(localPost || null);
-          setLoading(false);
-          return;
-        }
+        const { data, error } = await supabase.from('posts').select('*').eq('slug', slug).single();
 
-        const { data, error } = await supabase
-          .from('posts')
-          .select('*')
-          .eq('slug', slug)
-          .single();
-
-        if (error) {
-          if (error.code === 'PGRST116') {
-            const localPost = defaultPosts.find(p => p.slug === slug);
-            setPost(localPost || null);
-          } else {
-            throw error;
-          }
-        } else if (data) {
-          const mappedPost = {
+        if (error || !data) {
+          setPost(localPost);
+        } else {
+          setPost({
             ...data,
             readTime: data.readTime || data.read_time,
-          };
-          setPost(mappedPost);
+          });
         }
-      } catch (err) {
-        console.error('Error fetching post from Supabase:', err);
-        const localPost = defaultPosts.find(p => p.slug === slug);
-        setPost(localPost || null);
+      } catch {
+        setPost(localPost);
       } finally {
         setLoading(false);
       }
@@ -256,32 +234,29 @@ export function usePost(slug: string | undefined) {
 }
 
 export function useEducation() {
-  const [education, setEducation] = useState<Education[]>([]);
+  const [education, setEducation] = useState<Education[]>(defaultEducation);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchEducation() {
-      try {
-        if (!supabase) {
-          setEducation(defaultEducation);
-          setLoading(false);
-          return;
-        }
+      if (!supabase) {
+        setEducation(defaultEducation);
+        setLoading(false);
+        return;
+      }
 
+      try {
         const { data, error } = await supabase
           .from('education')
           .select('*')
           .order('period', { ascending: false });
 
-        if (error) throw error;
-        
-        if (data && data.length > 0) {
-          setEducation(data);
-        } else {
+        if (error || !data || data.length === 0) {
           setEducation(defaultEducation);
+        } else {
+          setEducation(data);
         }
-      } catch (err) {
-        console.error('Error fetching education:', err);
+      } catch {
         setEducation(defaultEducation);
       } finally {
         setLoading(false);
@@ -295,32 +270,29 @@ export function useEducation() {
 }
 
 export function useCertifications() {
-  const [certifications, setCertifications] = useState<Certification[]>([]);
+  const [certifications, setCertifications] = useState<Certification[]>(defaultCertifications);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchCertifications() {
-      try {
-        if (!supabase) {
-          setCertifications(defaultCertifications);
-          setLoading(false);
-          return;
-        }
+      if (!supabase) {
+        setCertifications(defaultCertifications);
+        setLoading(false);
+        return;
+      }
 
+      try {
         const { data, error } = await supabase
           .from('certifications')
           .select('*')
           .order('date', { ascending: false });
 
-        if (error) throw error;
-        
-        if (data && data.length > 0) {
-          setCertifications(data);
-        } else {
+        if (error || !data || data.length === 0) {
           setCertifications(defaultCertifications);
+        } else {
+          setCertifications(data);
         }
-      } catch (err) {
-        console.error('Error fetching certifications:', err);
+      } catch {
         setCertifications(defaultCertifications);
       } finally {
         setLoading(false);
@@ -334,31 +306,26 @@ export function useCertifications() {
 }
 
 export function useSkills() {
-  const [skills, setSkills] = useState<Skill[]>([]);
+  const [skills, setSkills] = useState<Skill[]>(defaultSkills);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchSkills() {
+      if (!supabase) {
+        setSkills(defaultSkills);
+        setLoading(false);
+        return;
+      }
+
       try {
-        if (!supabase) {
+        const { data, error } = await supabase.from('skills').select('*');
+
+        if (error || !data || data.length === 0) {
           setSkills(defaultSkills);
-          setLoading(false);
-          return;
-        }
-
-        const { data, error } = await supabase
-          .from('skills')
-          .select('*');
-
-        if (error) throw error;
-        
-        if (data && data.length > 0) {
-          setSkills(data);
         } else {
-          setSkills(defaultSkills);
+          setSkills(data);
         }
-      } catch (err) {
-        console.error('Error fetching skills:', err);
+      } catch {
         setSkills(defaultSkills);
       } finally {
         setLoading(false);

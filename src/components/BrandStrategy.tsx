@@ -73,17 +73,17 @@ export default function BrandStrategy() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="bg-gradient-to-br from-[#161920] to-slate-900">
+        <Card className="bg-zinc-900 border border-zinc-800">
           <Zap className="text-emerald-400 mb-4" size={32} />
           <h4 className="text-white font-bold mb-2">Web Systems</h4>
           <p className="text-sm text-slate-400">Custom, high-performance web applications that serve as the operational hub for businesses.</p>
         </Card>
-        <Card className="bg-gradient-to-br from-[#161920] to-slate-900">
+        <Card className="bg-zinc-900 border border-zinc-800">
           <Shield className="text-emerald-400 mb-4" size={32} />
           <h4 className="text-white font-bold mb-2">Business Automation</h4>
           <p className="text-sm text-slate-400">Data engineering pipelines that connect disparate systems and eliminate manual data entry.</p>
         </Card>
-        <Card className="bg-gradient-to-br from-[#161920] to-slate-900">
+        <Card className="bg-zinc-900 border border-zinc-800">
           <MessageSquare className="text-emerald-400 mb-4" size={32} />
           <h4 className="text-white font-bold mb-2">AI Document Intel</h4>
           <p className="text-sm text-slate-400">RAG systems and LLM integrations that turn static documents into interactive knowledge bases.</p>

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowUpRight, Calendar, Clock, Search, X } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, Search, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { usePosts } from '../hooks/useContent';
 import { formatDate } from '../lib/utils';
@@ -21,119 +21,103 @@ export default function BlogPage() {
   }, [posts, searchQuery]);
 
   return (
-    <main className="pt-32 pb-24 px-6 max-w-5xl mx-auto min-h-screen">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="mb-16"
-      >
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight text-white mb-6">Writing</h1>
-        <p className="text-lg md:text-xl text-zinc-400 font-light max-w-2xl leading-relaxed mb-10">
-          Thoughts, tutorials, and essays on software engineering, AI systems, and building scalable products.
+    <main className="pt-28 pb-20 px-6 max-w-6xl mx-auto min-h-screen">
+      {/* Header */}
+      <div className="pb-8 mb-8 border-b border-zinc-800/80">
+        <div className="font-mono text-xs uppercase tracking-widest text-emerald-400 font-semibold mb-1">
+          Index / Technical Writing
+        </div>
+        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-3">
+          Engineering Notes & System Design
+        </h1>
+        <p className="text-sm sm:text-base text-slate-100 max-w-2xl leading-relaxed mb-6">
+          Technical breakdowns, database performance tuning, distributed consensus explorations, and backend architectures.
         </p>
 
         {/* Search Bar */}
-        <div className="relative max-w-2xl">
-          <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-            <Search size={18} className="text-zinc-500" />
+        <div className="relative max-w-xl">
+          <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none">
+            <Search size={15} className="text-zinc-400" />
           </div>
           <input
             type="text"
-            placeholder="Search posts by title, category, or content..."
+            placeholder="Search notes by title, topic, or keyword..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white/[0.03] border border-white/10 rounded-2xl py-4 pl-12 pr-12 text-white placeholder:text-zinc-600 focus:outline-none focus:border-emerald-500/50 focus:bg-white/[0.05] transition-all duration-300"
+            className="w-full bg-zinc-900 border border-zinc-700 rounded-md py-2.5 pl-10 pr-10 font-mono text-xs text-white placeholder:text-zinc-400 focus:outline-none focus:border-emerald-400 transition-colors"
           />
           {searchQuery && (
             <button
               onClick={() => setSearchQuery('')}
-              className="absolute inset-y-0 right-4 flex items-center text-zinc-500 hover:text-white transition-colors"
+              className="absolute inset-y-0 right-3 flex items-center text-zinc-400 hover:text-white transition-colors"
             >
-              <X size={18} />
+              <X size={15} />
             </button>
           )}
         </div>
-      </motion.div>
+      </div>
 
-      <div className="space-y-12">
+      <div className="space-y-4">
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="glass-panel rounded-3xl p-8 h-[350px] animate-pulse">
-                <div className="flex flex-col gap-6 h-full">
-                  <div className="flex flex-wrap items-center gap-4">
-                    <div className="h-4 w-24 bg-white/10 rounded"></div>
-                    <div className="h-4 w-20 bg-white/10 rounded"></div>
-                  </div>
-                  <div className="h-8 w-3/4 bg-white/10 rounded"></div>
-                  <div className="space-y-3 flex-1">
-                    <div className="h-4 w-full bg-white/10 rounded"></div>
-                    <div className="h-4 w-5/6 bg-white/10 rounded"></div>
-                  </div>
-                  <div className="pt-6 border-t border-white/10 mt-auto">
-                    <div className="h-4 w-24 bg-white/10 rounded"></div>
-                  </div>
+              <div key={i} className="p-6 bg-zinc-900/80 border border-zinc-800 rounded-lg animate-pulse h-52">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="h-4 w-16 bg-zinc-800 rounded"></div>
+                  <div className="h-4 w-20 bg-zinc-800 rounded"></div>
                 </div>
+                <div className="h-6 w-3/4 bg-zinc-800 rounded mb-3"></div>
+                <div className="h-12 w-full bg-zinc-800 rounded mb-4"></div>
               </div>
             ))}
           </div>
         ) : (
           <AnimatePresence mode="popLayout">
             {filteredPosts.length === 0 ? (
-              <motion.div
-                key="no-results"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="text-center py-20 glass-panel rounded-3xl"
-              >
-                <Search size={48} className="mx-auto text-zinc-700 mb-4" />
-                <h3 className="text-xl text-white font-medium mb-2">No posts found</h3>
-                <p className="text-zinc-500">Try adjusting your search query or category.</p>
-              </motion.div>
+              <div className="text-center py-16 bg-zinc-900/80 border border-zinc-800 rounded-lg">
+                <p className="font-mono text-xs text-zinc-400">
+                  No technical notes match "{searchQuery}".
+                </p>
+              </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {filteredPosts.map((post, i) => (
-                  <motion.div 
-                    layout
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {filteredPosts.map((post) => (
+                  <div 
                     key={post.slug}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.4, delay: i * 0.05 }}
-                    className="h-full"
                   >
                     <Link 
                       to={`/blog/${post.slug}`}
-                      className={`group block glass-panel rounded-3xl p-8 hover:bg-white/[0.05] transition-all duration-500 h-full border ${post === posts[0] && !searchQuery ? 'border-emerald-500/20' : 'border-white/10'}`}
+                      className="group block p-6 bg-zinc-900/80 border border-zinc-800 rounded-lg hover:border-zinc-700 transition-colors h-full flex flex-col justify-between"
                     >
-                      <div className="flex flex-col h-full">
-                        <div className="flex flex-wrap items-center gap-4 text-xs font-mono mb-6 uppercase tracking-wider">
-                          {post === posts[0] && !searchQuery ? (
-                            <span className="px-3 py-1 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20 flex items-center gap-1.5">
-                              Featured
-                            </span>
-                          ) : (
-                            <span className="px-2 py-1 bg-white/5 rounded border border-white/10 text-zinc-300">{post.category}</span>
-                          )}
-                          <span className="flex items-center gap-1.5 text-zinc-500"><Calendar size={14} /> {formatDate(post.date)}</span>
-                          <span className="flex items-center gap-1.5 text-zinc-500"><Clock size={14} /> {post.readTime}</span>
-                        </div>
-                        <h2 className="text-2xl md:text-3xl font-medium text-white mb-4 group-hover:translate-x-2 transition-transform duration-500 group-hover:text-emerald-400">
-                          {post.title}
-                        </h2>
-                        <p className="text-base text-zinc-400 font-light leading-relaxed mb-8 flex-1">
-                          {post.excerpt}
-                        </p>
-                        <div className="flex items-center justify-between mt-auto pt-6 border-t border-white/10">
-                          <span className="text-sm font-medium text-white group-hover:text-emerald-400 transition-colors flex items-center gap-2">
-                            Read Article <ArrowUpRight size={16} />
+                      <div>
+                        <div className="flex flex-wrap items-center gap-3 font-mono text-xs mb-3">
+                          <span className="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-700 text-emerald-400 font-semibold">
+                            {post.category}
+                          </span>
+                          <span className="text-zinc-400 flex items-center gap-1">
+                            <Calendar size={12} /> {formatDate(post.date)}
+                          </span>
+                          <span className="text-zinc-400 flex items-center gap-1">
+                            <Clock size={12} /> {post.readTime}
                           </span>
                         </div>
+
+                        <h2 className="text-lg sm:text-xl font-semibold text-white mb-2 group-hover:text-emerald-400 transition-colors">
+                          {post.title}
+                        </h2>
+
+                        <p className="text-sm text-slate-100 leading-relaxed mb-4 line-clamp-3">
+                          {post.excerpt}
+                        </p>
+                      </div>
+
+                      <div className="pt-3 border-t border-zinc-800 flex items-center justify-between">
+                        <span className="font-mono text-xs text-white group-hover:text-emerald-400 transition-colors inline-flex items-center gap-1.5 font-semibold">
+                          Read Note <ArrowRight size={12} />
+                        </span>
                       </div>
                     </Link>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             )}

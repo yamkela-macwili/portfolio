@@ -3,7 +3,7 @@ SET content = '# 🚀 Job Intelligence Platform: Bridging the Gap Between Career
 
 ## Introduction
 
-Meet **Job Intelligence Platform** — an AI-powered application that helps professionals understand how well they fit specific job roles and what they need to learn to advance their careers.
+Meet **Job Intelligence Platform** - an AI-powered application that helps professionals understand how well they fit specific job roles and what they need to learn to advance their careers.
 
 In this post, I’ll walk you through the **vision, architecture, challenges, and lessons learned** while building a production-ready full-stack AI application.
 
@@ -382,7 +382,7 @@ Building Job Intelligence Platform reinforced:
 
 ## 🙌 Final Note
 
-This isn’t just a project — it’s a **career intelligence engine**.
+This isn’t just a project - it’s a **career intelligence engine**.
 
 The MVP is complete.
 Now it’s time to **scale, refine, and learn from real users.**

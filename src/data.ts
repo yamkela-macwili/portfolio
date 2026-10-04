@@ -108,14 +108,14 @@ export const projects: Project[] = [
     category: 'Full-Stack & AI',
     projectType: 'Full-Stack Application',
     domains: ['Full-Stack', 'AI Engineering', 'NLP', 'APIs'],
-    desc: 'Full-stack AI platform that analyzes CVs against job descriptions, computes match scores, identifies skill gaps, and generates structured learning roadmaps with an interactive React frontend.',
+    desc: 'Full-stack AI platform that analyzes CVs against job descriptions, computes match alignment, identifies skill gaps, and generates structured learning roadmaps with an interactive React frontend.',
     problem: 'Job seekers often struggle to understand how well their CV matches a specific role. Most applications provide no actionable feedback, making it difficult to identify concrete skill gaps or know what to learn next.',
-    solution: 'Architected and built a complete full-stack platform featuring a responsive React frontend, a high-performance FastAPI backend with NLP extraction routines, and Azure OpenAI integration to compare unstructured CV text with job specifications, calculate weighted alignment scores, and generate custom skill roadmaps.',
-    impact: 'Empowers users to make data-driven career decisions by clearly identifying skill gaps and next steps. Transforms job searching from a trial-and-error process into a structured, insight-driven experience.',
+    solution: 'Architected and built a complete full-stack platform featuring a responsive React frontend, a high-performance FastAPI backend with NLP extraction routines, and Azure OpenAI integration to compare unstructured CV text with job specifications, calculate alignment scores, and generate custom skill roadmaps.',
+    impact: 'Empowers users to make structured career decisions by identifying skill gaps and next steps with customized learning paths.',
     tech: ['Python', 'FastAPI', 'PostgreSQL', 'React', 'TypeScript', 'Azure OpenAI', 'Tailwind CSS'],
     architecture: 'Client-Server architecture with React SPA communicating via REST APIs to a containerized FastAPI backend, leveraging Azure OpenAI and PostgreSQL.',
     challenges: 'Extracting semantic structure from heterogeneous CV formats, managing token usage with LLM prompting, and handling CORS and secure auth.',
-    performance: 'Sub-2-second end-to-end analysis latency with optimized prompt parsing and vectorized skill indexing.',
+    performance: 'Optimized FastAPI asynchronous endpoints with prompt engineering and structured schema parsing.',
     featured: true,
     type: 'free',
     link: 'https://job-intelligence-platform.vercel.app',
@@ -131,11 +131,11 @@ export const projects: Project[] = [
     desc: 'End-to-end data pipeline based on the Olist Brazilian E-Commerce dataset featuring automated ingestion, data quality checks, SQL transformations, RFM customer behavior feature engineering, and an interactive Metabase dashboard.',
     problem: 'Raw e-commerce transaction data across distributed order, customer, and payment tables is unstructured for analytics, prone to silent data quality anomalies, and lacks automated segmentation for customer behavior insights.',
     solution: 'Engineered an automated end-to-end data pipeline using Apache Airflow 3 for orchestration, Great Expectations for automated schema and quality assertions, robust SQL transformations in PostgreSQL, and RFM (Recency, Frequency, Monetary) feature engineering to feed an interactive Metabase analytical dashboard.',
-    impact: 'Automated daily pipeline execution with zero data quality escapes, reducing metric preparation latency and delivering actionable customer lifecycle segmentation for decision-making.',
+    impact: 'Automated daily pipeline execution with automated data quality gates, structured metric preparation, and customer lifecycle segmentation.',
     tech: ['Apache Airflow 3', 'PostgreSQL', 'Python', 'SQL', 'Great Expectations', 'Metabase'],
     architecture: 'Airflow 3 DAG orchestrates ingestion tasks, triggers Great Expectations quality validations, executes staged PostgreSQL SQL transformations, computes RFM scores, and feeds Metabase dashboards.',
     challenges: 'Handling complex transaction relationships across multiple tables, ensuring strict data quality thresholds, and designing efficient SQL aggregations for RFM scoring.',
-    performance: 'Automated end-to-end pipeline execution with zero schema escapes across 100k+ customer records and real-time dashboard serving.',
+    performance: 'Automated end-to-end Airflow pipeline orchestration with Great Expectations validation gates and dimensional PostgreSQL modeling.',
     featured: true,
     type: 'free',
     github: 'https://github.com/yamkela-macwili/olist-customer-behavior-pipeline'
@@ -150,11 +150,11 @@ export const projects: Project[] = [
     desc: 'Collaborative AI agent that automates technical project scoping, architecture planning, and modular task breakdown.',
     problem: 'Turning a raw project idea into a structured, actionable plan is often time-consuming and unclear, especially for developers who need guidance on architecture, tools, and implementation steps.',
     solution: 'Contributed to an AI-powered planning agent that transforms high-level project ideas into structured development plans, including system architecture blueprints, tech stack recommendations, and step-by-step execution phases using LangChain and FastAPI.',
-    impact: 'Accelerates the project planning process and helps developers move from idea to execution faster, improving productivity and reducing uncertainty in early-stage development.',
+    impact: 'Accelerates the project planning process and helps developers move from idea to execution with clear architecture phases.',
     tech: ['Python', 'LangChain', 'OpenAI', 'FastAPI', 'System Architecture'],
     architecture: 'Modular agent architecture built with LangChain and FastAPI, executing structured decomposition prompts against OpenAI models.',
     challenges: 'Ensuring consistency and feasibility in generated technical blueprints while keeping prompt response latency low.',
-    performance: 'Generates comprehensive architectural roadmaps in seconds, reducing initial project scoping time by over 60%.',
+    performance: 'Generates structured technical specification roadmaps and architecture breakdowns via LangChain decomposition.',
     featured: true,
     type: 'free'
   },
@@ -168,11 +168,11 @@ export const projects: Project[] = [
     desc: 'High-throughput data ingestion pipeline and aggregation API that collects, deduplicates, and indexes job listings from multiple sources.',
     problem: 'Fragmented job data across various platforms makes it difficult to find relevant roles, resulting in duplicate entries, mismatched schemas, and high request latency.',
     solution: 'Developed a robust scraping engine and API aggregator with deduplication logic using Python, BeautifulSoup, and Scrapy, paired with Redis caching and PostgreSQL relational storage.',
-    impact: 'Aggregates 5,000+ listings daily with sub-second retrieval times, unified search capabilities, and 99% pipeline uptime.',
+    impact: 'Automated multi-source extraction, deduplication, and PostgreSQL relational indexing.',
     tech: ['Python', 'BeautifulSoup', 'Scrapy', 'Redis', 'PostgreSQL', 'REST APIs'],
     architecture: 'Scraper and API ingestion engine utilizing Redis as a fast deduplication key-value cache and PostgreSQL for relational indexing and queries.',
     challenges: 'Dynamic website DOM changes, anti-scraping countermeasures, and high-volume data deduplication.',
-    performance: 'Processes 5,000+ job records daily with 99% uptime and sub-second query response times.',
+    performance: 'Multi-threaded scraping and indexing engine utilizing Redis caching for deduplication and PostgreSQL relational queries.',
     featured: true,
     type: 'free'
   },
@@ -186,11 +186,11 @@ export const projects: Project[] = [
     desc: 'Optimized asynchronous utility for low-latency market data retrieval, intelligent caching, and local storage.',
     problem: 'API rate limits and slow network responses hinder real-time data analysis and create bottlenecks during batch processing.',
     solution: 'Implemented an intelligent caching layer and asynchronous request handling with Python Asyncio and Redis to batch queries and store data efficiently in SQLite.',
-    impact: 'Improved data retrieval speed by 3x, eliminated rate-limit bottlenecks, and provided dependable local data access for downstream analytics.',
+    impact: 'Protected against rate-limit bottlenecks and provided dependable local data access for downstream analytics.',
     tech: ['Python', 'Asyncio', 'Redis', 'SQLite', 'REST APIs'],
     architecture: 'Async event loop architecture with Redis caching for rate-limit protection and SQLite for structured local time-series storage.',
     challenges: 'Graceful backoff when hitting provider rate limits and managing memory footprint during high-volume streaming.',
-    performance: '3x throughput improvement over synchronous implementations with zero dropped requests.',
+    performance: 'Asynchronous event loop utilizing Redis caching for rate-limit protection and SQLite storage.',
     featured: false,
     type: 'free'
   }
@@ -198,96 +198,68 @@ export const projects: Project[] = [
 
 export const defaultSkills: Skill[] = [
   // Languages
-  { id: '1', name: 'Python', category: 'Languages', icon: 'python' },
-  { id: '2', name: 'Java', category: 'Languages', icon: 'java' },
-  { id: '3', name: 'TypeScript', category: 'Languages', icon: 'typescript' },
-  { id: '4', name: 'JavaScript', category: 'Languages', icon: 'javascript' },
-  { id: '5', name: 'SQL', category: 'Languages', icon: 'sql' },
+  { id: '1', name: 'Python', category: 'Languages' },
+  { id: '2', name: 'Java', category: 'Languages' },
+  { id: '3', name: 'JavaScript', category: 'Languages' },
+  { id: '4', name: 'TypeScript', category: 'Languages' },
+  { id: '5', name: 'SQL', category: 'Languages' },
+  { id: '6', name: 'HTML5/CSS3', category: 'Languages' },
 
-  // Frontend
-  { id: '6', name: 'React', category: 'Frontend', icon: 'react' },
-  { id: '7', name: 'TypeScript', category: 'Frontend', icon: 'typescript' },
-  { id: '8', name: 'JavaScript', category: 'Frontend', icon: 'javascript' },
-  { id: '9', name: 'Tailwind CSS', category: 'Frontend', icon: 'tailwind' },
-  { id: '10', name: 'HTML', category: 'Frontend', icon: 'html' },
-  { id: '11', name: 'CSS', category: 'Frontend', icon: 'css' },
+  // Frameworks & Backend / Frontend
+  { id: '7', name: 'FastAPI', category: 'Backend' },
+  { id: '8', name: 'Flask', category: 'Backend' },
+  { id: '9', name: 'React', category: 'Frontend' },
+  { id: '10', name: 'Tailwind CSS', category: 'Frontend' },
+  { id: '11', name: 'LangChain', category: 'AI Engineering' },
 
-  // Backend
-  { id: '12', name: 'FastAPI', category: 'Backend', icon: 'fastapi' },
-  { id: '13', name: 'Flask', category: 'Backend', icon: 'flask' },
-  { id: '14', name: 'REST APIs', category: 'Backend', icon: 'api' },
+  // Databases & Storage
+  { id: '12', name: 'PostgreSQL', category: 'Databases' },
+  { id: '13', name: 'MySQL', category: 'Databases' },
+  { id: '14', name: 'SQLite', category: 'Databases' },
+  { id: '15', name: 'Redis', category: 'Databases' },
 
-  // Data Engineering
-  { id: '15', name: 'Apache Airflow 3', category: 'Data Engineering', icon: 'airflow' },
-  { id: '16', name: 'Metabase', category: 'Data Engineering', icon: 'metabase' },
-  { id: '17', name: 'pgAdmin 4', category: 'Data Engineering', icon: 'pgadmin' },
-  { id: '18', name: 'Great Expectations', category: 'Data Engineering', icon: 'greatexpectations' },
-  { id: '19', name: 'ETL Pipelines', category: 'Data Engineering', icon: 'pipeline' },
-  { id: '20', name: 'Data Quality', category: 'Data Engineering', icon: 'dataquality' },
-
-  // AI Engineering
-  { id: '21', name: 'Azure OpenAI', category: 'AI Engineering', icon: 'openai' },
-  { id: '22', name: 'OpenAI API', category: 'AI Engineering', icon: 'openai' },
-  { id: '23', name: 'LangChain', category: 'AI Engineering', icon: 'langchain' },
-  { id: '24', name: 'RAG Systems', category: 'AI Engineering', icon: 'rag' },
-  { id: '25', name: 'Prompt Engineering', category: 'AI Engineering', icon: 'prompt' },
-
-  // Databases
-  { id: '26', name: 'PostgreSQL', category: 'Databases', icon: 'postgresql' },
-  { id: '27', name: 'MySQL', category: 'Databases', icon: 'mysql' },
-  { id: '28', name: 'SQLite', category: 'Databases', icon: 'sqlite' },
-
-  // Tools & DevOps
-  { id: '29', name: 'Git', category: 'Tools & DevOps', icon: 'git' },
-  { id: '30', name: 'Docker', category: 'Tools & DevOps', icon: 'docker' },
-  { id: '31', name: 'Vercel', category: 'Tools & DevOps', icon: 'vercel' },
-  { id: '32', name: 'Linux', category: 'Tools & DevOps', icon: 'linux' }
-];
-
-export const concepts = [
-  'Full-Stack Architecture',
-  'System Design',
-  'REST APIs',
-  'ETL & Data Pipelines',
-  'RFM Feature Engineering',
-  'Data Quality Checks',
-  'Caching & Performance',
-  'Agile Development',
-  'Intelligent Automation'
+  // Data Engineering & Tools
+  { id: '16', name: 'Git & GitHub', category: 'Tools & DevOps' },
+  { id: '17', name: 'Docker', category: 'Tools & DevOps' },
+  { id: '18', name: 'Apache Airflow 3', category: 'Data Engineering' },
+  { id: '19', name: 'Metabase', category: 'Data Engineering' },
+  { id: '20', name: 'Great Expectations', category: 'Data Engineering' },
+  { id: '21', name: 'pgAdmin 4', category: 'Databases' },
+  { id: '22', name: 'Linux/Bash', category: 'Tools & DevOps' },
+  { id: '23', name: 'REST APIs', category: 'Backend' },
+  { id: '24', name: 'Azure OpenAI', category: 'AI Engineering' },
 ];
 
 export const defaultEducation: Education[] = [
   {
-    id: '1',
-    degree: 'BSc in Applied Statistics',
-    institution: 'University of Cape Town',
-    period: '2019 - 2022',
-    description: 'Focused on statistical modeling, data analysis, and computational mathematics.',
-    icon: 'graduation-cap'
-  }
+    id: 'edu-1',
+    degree: 'Software Development Programme',
+    institution: 'WeThinkCode_',
+    period: 'Present',
+    description: 'WeThinkCode_, Cape Town, South Africa — Software engineering, object-oriented systems, Python, Java, agile methodologies, and scalable backend design.',
+  },
+  {
+    id: 'edu-2',
+    degree: 'Bachelor of Science',
+    institution: 'Walter Sisulu University',
+    period: '2023',
+    description: 'Walter Sisulu University, Eastern Cape, South Africa — Mathematical, computational, and scientific foundations focusing on analytical problem-solving.',
+  },
 ];
 
 export const defaultCertifications: Certification[] = [
   {
-    id: 'c1',
-    title: 'AZ-900: Microsoft Azure Fundamentals',
-    issuer: 'Microsoft',
-    date: '2026',
-    link: '#'
+    id: 'cert-1',
+    title: 'Certified in Cybersecurity (CC)',
+    issuer: 'ISC2',
+    date: '2025',
+    link: 'https://www.isc2.org',
   },
   {
-    id: 'c2',
-    title: 'WeThinkCode_ GenAI Course for Software Engineers',
-    issuer: 'WeThinkCode',
-    date: '2026',
-    link: '#'
+    id: 'cert-2',
+    title: 'Data Science & Machine Learning Foundations',
+    issuer: 'Professional Certification',
+    date: '2024',
+    link: '#',
   },
-  {
-    id: 'c3',
-    title: 'Google AI Essentials',
-    issuer: 'Google',
-    date: '2026',
-    link: '#'
-  }
 ];
-

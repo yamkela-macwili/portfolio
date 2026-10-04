@@ -1,153 +1,231 @@
-import { motion, AnimatePresence } from 'motion/react';
-import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight, FileText } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../context/AuthContext';
+import { useProfile } from '../context/ProfileContext';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const { user } = useAuth();
+  const { openCVModal } = useProfile();
   const location = useLocation();
   const isHome = location.pathname === '/';
-  const { user } = useAuth();
-  const [isOpen, setIsOpen] = useState(false);
 
-  // Close menu on route change
   useEffect(() => {
-    setIsOpen(false);
-  }, [location]);
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
 
-  // Prevent scroll when menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [isOpen]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks = [
-    { name: 'About', href: isHome ? "#about" : "/#about" },
-    { name: 'Projects', href: isHome ? "#projects" : "/#projects" },
-    { name: 'Blog', href: isHome ? "#blog" : "/#blog" },
+    { name: 'Projects', href: isHome ? '#projects' : '/projects' },
+    { name: 'Profile', href: isHome ? '#about' : '/#about' },
+    { name: 'Credentials', href: isHome ? '#education' : '/#education' },
+    { name: 'Articles', href: isHome ? '#blog' : '/blog' },
+    { name: 'Contact', href: isHome ? '#contact' : '/#contact' },
   ];
 
   return (
     <>
-      <motion.nav 
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] md:w-[calc(100%-3rem)] max-w-4xl"
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+          scrolled
+            ? 'py-3.5 bg-base/95 border-b border-border'
+            : 'py-5 bg-transparent'
+        }`}
       >
-        <div className="glass-panel rounded-full px-4 md:px-6 h-14 flex items-center justify-between shadow-2xl">
-          <Link 
-            to="/" 
+        <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
+          {/* Brand Signature */}
+          <Link
+            to="/"
             onClick={() => {
               if (isHome) {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }
             }}
-            className="flex items-center gap-3 group shrink-0"
+            className="flex items-center gap-3 group"
           >
-            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-500 text-white group-hover:bg-emerald-400 transition-all duration-300">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 17L10 11L4 5" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M12 19H20" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+            <div className="w-9 h-9 rounded-lg bg-surface border border-border flex items-center justify-center font-mono text-xs font-bold text-fg group-hover:border-accent group-hover:text-accent transition-colors">
+              YM
             </div>
-            <span className="text-white font-medium tracking-tight group-hover:text-emerald-400 transition-colors hidden sm:inline">
-              Yamkela Macwili
-            </span>
+            <div className="flex flex-col">
+              <span className="text-sm font-bold tracking-tight text-fg group-hover:text-accent transition-colors">
+                Yamkela Macwili
+              </span>
+              <span className="hidden sm:inline text-[11px] font-mono text-fg-subtle">
+                Full-Stack Software Engineer
+              </span>
+            </div>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8 text-micro text-zinc-400">
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1 p-1.5 rounded-full bg-surface border border-border">
             {navLinks.map((link) => (
               link.href.startsWith('/') ? (
-                <Link key={link.name} to={link.href} className="hover:text-white transition-colors">{link.name}</Link>
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className="px-4 py-1.5 rounded-full text-xs font-medium text-fg-muted hover:text-fg hover:bg-surface-raised transition-colors"
+                >
+                  {link.name}
+                </Link>
               ) : (
-                <a key={link.name} href={link.href} className="hover:text-white transition-colors">{link.name}</a>
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="px-4 py-1.5 rounded-full text-xs font-medium text-fg-muted hover:text-fg hover:bg-surface-raised transition-colors"
+                >
+                  {link.name}
+                </a>
               )
             ))}
+            <button
+              onClick={openCVModal}
+              className="px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-accent hover:bg-surface-raised transition-colors flex items-center gap-1"
+            >
+              <FileText size={12} />
+              <span>CV</span>
+            </button>
             {user && (
-              <Link to="/admin" className="text-emerald-400 hover:text-emerald-300 transition-colors">Admin</Link>
+              <Link
+                to="/admin"
+                className="px-3 py-1.5 rounded-full text-xs font-mono font-semibold text-accent hover:bg-surface-raised transition-colors"
+              >
+                ADMIN
+              </Link>
             )}
-          </div>
+          </nav>
 
-          <div className="flex items-center gap-4">
-            <a href={isHome ? "#contact" : "/#contact"} className="hidden sm:block text-micro text-white hover:text-emerald-400 transition-colors">
-              Contact
+          {/* Right Action & Let's Talk CTA */}
+          <div className="flex items-center gap-2.5">
+            <button
+              onClick={openCVModal}
+              className="hidden lg:inline-flex items-center gap-1 text-xs font-mono text-fg-muted hover:text-fg px-3.5 py-2 rounded-xl border border-border bg-surface hover:border-border-hover transition-colors"
+              title="Open Curriculum Vitae"
+            >
+              <FileText size={12} className="text-accent" />
+              <span>Resume</span>
+            </button>
+
+            <a
+              href="https://github.com/yamkela-macwili"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1 text-xs font-mono text-fg-muted hover:text-fg px-3.5 py-2 rounded-xl border border-border bg-surface hover:border-border-hover transition-colors"
+            >
+              GitHub <ArrowUpRight size={12} />
             </a>
-            <button 
+
+            <a
+              href={isHome ? '#contact' : '/#contact'}
+              className="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-fg text-dark hover:bg-accent hover:text-on-accent transition-colors active:scale-95"
+            >
+              Let's Talk <ArrowUpRight size={13} />
+            </a>
+
+            {/* Mobile Hamburger */}
+            <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 text-zinc-400 hover:text-white transition-colors"
+              className="md:hidden p-2 rounded-lg bg-surface border border-border text-fg-muted hover:text-fg transition-colors"
               aria-label="Toggle menu"
             >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
+              {isOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
           </div>
         </div>
-      </motion.nav>
+      </header>
 
       {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl flex flex-col items-center justify-center p-8 md:hidden"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.15 }}
+            className="fixed inset-0 top-16 z-40 bg-base/98 backdrop-blur-2xl border-b border-border flex flex-col p-6 md:hidden overflow-y-auto"
           >
-            <div className="flex flex-col items-center gap-8 text-center">
-              {navLinks.map((link, i) => (
-                <motion.div
-                  key={link.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  {link.href.startsWith('/') ? (
-                    <Link 
-                      to={link.href} 
-                      className="text-3xl font-light text-white hover:text-emerald-400 transition-colors"
-                    >
-                      {link.name}
-                    </Link>
-                  ) : (
-                    <a 
-                      href={link.href} 
-                      className="text-3xl font-light text-white hover:text-emerald-400 transition-colors"
-                    >
-                      {link.name}
-                    </a>
-                  )}
-                </motion.div>
-              ))}
-              {user && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <Link 
-                    to="/admin" 
-                    className="text-3xl font-light text-emerald-400 hover:text-emerald-300 transition-colors"
+            <div className="flex flex-col gap-3 pt-2">
+              {navLinks.map((link) => (
+                link.href.startsWith('/') ? (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-lg font-medium text-fg hover:text-accent py-3 border-b border-border transition-colors"
                   >
-                    Admin
+                    {link.name}
                   </Link>
-                </motion.div>
-              )}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
+                ) : (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className="text-lg font-medium text-fg hover:text-accent py-3 border-b border-border transition-colors"
+                  >
+                    {link.name}
+                  </a>
+                )
+              ))}
+
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  openCVModal();
+                }}
+                className="text-lg font-medium text-accent hover:underline py-3 border-b border-border transition-colors text-left flex items-center justify-between"
               >
-                <a 
-                  href={isHome ? "#contact" : "/#contact"} 
+                <span>Curriculum Vitae / Resume</span>
+                <FileText size={18} />
+              </button>
+
+              {user && (
+                <Link
+                  to="/admin"
                   onClick={() => setIsOpen(false)}
-                  className="px-8 py-4 bg-white text-black rounded-full font-medium text-sm hover:bg-emerald-400 transition-colors inline-block"
+                  className="text-lg font-mono text-accent py-3 border-b border-border"
                 >
-                  Get in touch
+                  ADMIN DASHBOARD
+                </Link>
+              )}
+
+              <div className="pt-6 space-y-4">
+                <a
+                  href="#contact"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full py-3 px-4 rounded-xl bg-accent text-on-accent font-semibold text-center block shadow-glow"
+                >
+                  Initiate Contact
                 </a>
-              </motion.div>
+
+                <div className="grid grid-cols-2 gap-2 text-xs font-mono text-fg-subtle">
+                  <a
+                    href="https://github.com/yamkela-macwili"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-lg bg-surface border border-border text-center hover:text-fg transition-colors"
+                  >
+                    GitHub ↗
+                  </a>
+                  <a
+                    href="https://www.linkedin.com/in/yamkela-macwili-116442253/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-lg bg-surface border border-border text-center hover:text-fg transition-colors"
+                  >
+                    LinkedIn ↗
+                  </a>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}

@@ -91,63 +91,65 @@ export default function Terminal({ isOpen, onClose }: { isOpen: boolean; onClose
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.9, y: 20 }}
-          className={`fixed z-50 bg-[#0c0c0c] border border-white/10 shadow-2xl rounded-xl overflow-hidden flex flex-col font-mono text-sm ${
+          exit={{ opacity: 0, scale: 0.95, y: 10 }}
+          className={`fixed z-50 bg-base border border-border shadow-2xl rounded-lg overflow-hidden flex flex-col font-mono text-xs ${
             isMaximized 
               ? 'inset-4' 
-              : 'bottom-4 right-4 w-[90vw] md:w-[600px] h-[400px]'
+              : 'bottom-4 right-4 w-[90vw] md:w-[580px] h-[380px]'
           }`}
         >
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/5">
-            <div className="flex items-center gap-2 text-zinc-400">
-              <TerminalIcon size={14} />
-              <span className="text-xs">yamkela@portfolio:~</span>
+          <div className="flex items-center justify-between px-4 py-2 bg-surface border-b border-border">
+            <div className="flex items-center gap-2 text-fg-subtle">
+              <TerminalIcon size={13} className="text-accent" />
+              <span className="text-xs text-fg">yamkela@systems:~</span>
             </div>
             <div className="flex items-center gap-2">
               <button 
                 onClick={() => setIsMaximized(!isMaximized)} 
-                className="p-1 hover:bg-white/10 rounded text-zinc-400 hover:text-white transition-colors"
+                className="p-1 hover:bg-surface-raised rounded text-fg-subtle hover:text-fg transition-colors"
+                title={isMaximized ? "Restore" : "Maximize"}
               >
-                {isMaximized ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+                {isMaximized ? <Minimize2 size={13} /> : <Maximize2 size={13} />}
               </button>
               <button 
                 onClick={onClose} 
-                className="p-1 hover:bg-red-500/20 rounded text-zinc-400 hover:text-red-400 transition-colors"
+                className="p-1 hover:bg-danger/20 rounded text-fg-subtle hover:text-danger transition-colors"
+                title="Close"
               >
-                <X size={14} />
+                <X size={13} />
               </button>
             </div>
           </div>
 
           {/* Body */}
           <div 
-            className="flex-1 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent"
+            className="flex-1 p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent text-xs"
             onClick={() => inputRef.current?.focus()}
           >
             {history.map((entry, i) => (
-              <div key={i} className={`mb-2 ${entry.type === 'input' ? 'text-zinc-400' : 'text-emerald-400 whitespace-pre-wrap'}`}>
+              <div key={i} className={`mb-2 ${entry.type === 'input' ? 'text-fg-subtle' : 'text-accent-light whitespace-pre-wrap'}`}>
                 {entry.type === 'input' ? (
                   <div className="flex gap-2">
-                    <span className="text-emerald-500">➜</span>
-                    <span>{entry.content}</span>
+                    <span className="text-emerald-400 font-bold">➜</span>
+                    <span className="text-white">{entry.content}</span>
                   </div>
                 ) : (
                   <div>{entry.content}</div>
                 )}
               </div>
             ))}
-            <div className="flex gap-2 text-zinc-100">
-              <span className="text-emerald-500">➜</span>
+            <div className="flex gap-2 text-white">
+              <span className="text-emerald-400 font-bold">➜</span>
               <input
                 ref={inputRef}
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
-                className="flex-1 bg-transparent border-none outline-none focus:ring-0 p-0"
+                className="flex-1 bg-transparent border-none outline-none focus:ring-0 p-0 text-xs text-white"
                 autoFocus
               />
             </div>

@@ -43,9 +43,9 @@ async function startServer() {
       
       // Use a Promise with a timeout to prevent hanging
       const sendEmailPromise = resend.emails.send({
-        from: "Yamkela Macwili — Portfolio <onboarding@resend.dev>",
+        from: "Yamkela Macwili - Portfolio <onboarding@resend.dev>",
         to: ["yamkela22y@gmail.com"],
-        subject: `New message from ${name} — ${subject}`,
+        subject: `New message from ${name} - ${subject}`,
         replyTo: email,
         html: `
           <!DOCTYPE html>
