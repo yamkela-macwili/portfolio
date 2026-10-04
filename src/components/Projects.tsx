@@ -1,4 +1,4 @@
-import { ArrowUpRight, ArrowRight, ExternalLink, Cpu, Activity } from 'lucide-react';
+import { ArrowUpRight, ArrowRight, ExternalLink, Cpu, Activity, Database, GitBranch, Layers } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useProjects } from '../hooks/useContent';
 
@@ -6,7 +6,7 @@ export default function Projects() {
   const { projects } = useProjects();
   const featuredProjects = projects.filter((p) => p.featured);
 
-  // Helper to render clean solid visual previews for each project
+  // Helper to render clean solid visual previews for each project without mocked results
   const renderProjectVisual = (slug: string) => {
     switch (slug) {
       case 'job-intelligence-platform':
@@ -27,12 +27,13 @@ export default function Projects() {
                   <Cpu size={16} className="text-accent" />
                   <div>
                     <div className="text-xs font-semibold text-fg">Semantic CV Match Engine</div>
-                    <div className="text-[10px] font-mono text-fg-subtle">NLP Extraction &amp; Weighted Scoring</div>
+                    <div className="text-[10px] font-mono text-fg-subtle">NLP Extraction &amp; Alignment Scoring</div>
                   </div>
                 </div>
                 <div className="text-right">
-                  <div className="text-xs font-mono font-bold text-fg">94.2% FIT</div>
-                  <div className="text-[10px] font-mono text-fg-subtle">&lt; 1.8s Latency</div>
+                  <span className="px-2 py-0.5 rounded bg-base border border-border text-[10px] font-mono text-accent">
+                    Active Pipeline
+                  </span>
                 </div>
               </div>
 
@@ -56,7 +57,7 @@ export default function Projects() {
                 Airflow 3 · PostgreSQL · Metabase
               </span>
               <span className="font-mono text-xs text-fg-subtle">
-                100k+ Records
+                Data Pipeline
               </span>
             </div>
 
@@ -67,7 +68,7 @@ export default function Projects() {
                     <Activity size={13} className="text-accent" />
                     DAG: olist_rfm_pipeline
                   </span>
-                  <span className="text-accent font-semibold">0 ERRORS</span>
+                  <span className="text-accent text-[10px] font-mono">Airflow Orchestrated</span>
                 </div>
                 <div className="flex items-center justify-between gap-1 text-[10px] font-mono text-fg-subtle">
                   <span className="px-1.5 py-0.5 rounded bg-base border border-border text-fg-muted">Ingest</span>
@@ -98,7 +99,7 @@ export default function Projects() {
             <div className="p-3 rounded-lg bg-surface border border-border">
               <div className="flex items-center justify-between text-xs mb-1.5">
                 <span className="font-semibold text-fg">Autonomous Technical Scoping</span>
-                <span className="text-[10px] font-mono text-accent font-semibold">60% FASTER</span>
+                <span className="text-[10px] font-mono text-accent">Agent Workflow</span>
               </div>
               <p className="text-[11px] text-fg-secondary line-clamp-2">
                 Transforms unstructured concepts into system architecture blueprints, tech stacks, and step-by-step phases.
@@ -122,7 +123,7 @@ export default function Projects() {
             <div className="p-3 rounded-lg bg-surface border border-border">
               <div className="flex items-center justify-between text-xs font-semibold text-fg mb-1">
                 <span>Distributed Pipeline &amp; Cache</span>
-                <span className="text-accent font-mono text-[10px]">99% UPTIME</span>
+                <span className="text-accent font-mono text-[10px]">Indexed Storage</span>
               </div>
               <p className="text-[11px] text-fg-secondary">
                 High-throughput data ingestion with Redis key-value caching and PostgreSQL relational indexing.

@@ -389,11 +389,19 @@
 ───────────────────────────────────────────── */
 
 @media print {
-  body {
-    background-color: #ffffff !important;
-    color: #000000 !important;
+  html, body {
+    background: #ffffff !important;
+    color: #111827 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
+  /* Hide background elements during print */
+  body > div > *:not(#print-mount):not(.cv-modal-container),
   header,
   footer,
   nav,
@@ -401,8 +409,39 @@
     display: none !important;
   }
 
+  .cv-modal-overlay {
+    background: transparent !important;
+    position: static !important;
+    padding: 0 !important;
+    inset: auto !important;
+    overflow: visible !important;
+  }
+
+  .cv-modal-card {
+    border: none !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    max-width: 100% !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    position: static !important;
+  }
+
+  .cv-printable-area {
+    background: #ffffff !important;
+    color: #111827 !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
   @page {
-    margin: 1.2cm;
-    size: auto;
+    margin: 1.5cm 1.5cm 1.5cm 1.5cm;
+    size: A4 portrait;
   }
 }

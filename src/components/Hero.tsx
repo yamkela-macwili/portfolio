@@ -25,7 +25,7 @@ export default function Hero() {
           {/* Subtitle / Role Tagline */}
           <div className="font-mono text-xs uppercase tracking-widest text-accent font-semibold mb-3 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            Full-Stack Software Engineer &amp; Data Architect · Cape Town, ZA
+            Junior Backend Developer · Cape Town, ZA
           </div>
 
           {/* Hero Headline */}
@@ -35,7 +35,7 @@ export default function Hero() {
 
           {/* Subheading / Narrative */}
           <p className="text-base sm:text-lg text-fg-secondary font-normal max-w-2xl leading-relaxed mb-8">
-            I engineer resilient web applications, distributed backend services, and automated data pipelines. Backed by academic training in <span className="text-fg font-medium">Applied Statistics</span> with rigorous production focus on data integrity, determinism, and high-performance user interfaces.
+            Junior Backend Developer with a strong foundation in <span className="text-fg font-medium">Python and Java</span>, focused on building scalable backend systems, APIs, and data driven applications. Passionate about intelligent automation, clean architecture, and solving real-world problems through code.
           </p>
 
           {/* Action CTA Buttons & Quick Links */}
@@ -82,18 +82,26 @@ export default function Hero() {
 
         {/* Right Column: Clean Profile Image Holder Frame */}
         <div className="lg:col-span-5 flex justify-center">
-          <div className="relative w-full max-w-md group">
+          <div className="relative w-full max-w-sm sm:max-w-md group">
             {/* Ambient Background Glow */}
             <div className="absolute -inset-1.5 bg-gradient-to-tr from-accent/20 via-border-hover/30 to-accent/10 rounded-3xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
             {/* Main Image Holder Card */}
             <div className="relative rounded-3xl bg-surface border border-border overflow-hidden shadow-2xl p-4 sm:p-5 flex flex-col">
               {/* Photo Frame Container */}
-              <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-base border border-border group/img">
+              <div className="relative aspect-[4/5] sm:aspect-[4/5] w-full rounded-2xl overflow-hidden bg-base border border-border flex items-center justify-center">
+                {/* Ambient backdrop blur of photo to seamlessly fill any proportion margins */}
+                <img
+                  src={profileImage || '/profile.jpg'}
+                  alt=""
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover scale-110 blur-xl opacity-35"
+                />
+                {/* Foreground uncropped image fitted directly within the border */}
                 <img
                   src={profileImage || '/profile.jpg'}
                   alt="Yamkela Macwili — Software Engineer"
-                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover/img:scale-[1.03]"
+                  className="relative z-10 w-full h-full object-contain object-center rounded-xl p-0.5 transition-transform duration-300 group-hover:scale-[1.01]"
                 />
               </div>
 

@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
-import { ProfileProvider } from './context/ProfileContext';
+import { ProfileProvider, useProfile } from './context/ProfileContext';
 import Navbar from './components/Navbar';
 import ScrollProgress from './components/ScrollProgress';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
 import CVModal from './components/CVModal';
 import ImageUploadModal from './components/ImageUploadModal';
+import GoogleDriveSyncModal from './components/GoogleDriveSyncModal';
 import Home from './pages/Home';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
@@ -19,6 +20,21 @@ import PostEditor from './pages/admin/PostEditor';
 import EducationEditor from './pages/admin/EducationEditor';
 import CertificationEditor from './pages/admin/CertificationEditor';
 import ProtectedRoute from './components/ProtectedRoute';
+
+function AppModals() {
+  const { isDriveModalOpen, closeDriveModal, driveModalTab } = useProfile();
+  return (
+    <>
+      <CVModal />
+      <ImageUploadModal />
+      <GoogleDriveSyncModal
+        isOpen={isDriveModalOpen}
+        onClose={closeDriveModal}
+        defaultTab={driveModalTab}
+      />
+    </>
+  );
+}
 
 export default function App() {
   return (
@@ -51,8 +67,7 @@ export default function App() {
               </Route>
             </Routes>
             <Footer />
-            <CVModal />
-            <ImageUploadModal />
+            <AppModals />
           </div>
         </BrowserRouter>
       </ProfileProvider>

@@ -6,6 +6,8 @@ interface ProfileContextType {
   cvData: CVProfile;
   isCVModalOpen: boolean;
   isImageModalOpen: boolean;
+  isDriveModalOpen: boolean;
+  driveModalTab: 'photo' | 'resume';
   updateProfileImage: (url: string) => void;
   updateCV: (data: CVProfile) => void;
   resetCV: () => void;
@@ -14,12 +16,14 @@ interface ProfileContextType {
   closeCVModal: () => void;
   openImageModal: () => void;
   closeImageModal: () => void;
+  openDriveModal: (tab?: 'photo' | 'resume') => void;
+  closeDriveModal: () => void;
 }
 
 const ProfileContext = createContext<ProfileContextType | undefined>(undefined);
 
 const STORAGE_KEY_IMAGE = 'ym_profile_image';
-const STORAGE_KEY_CV = 'ym_cv_profile_data';
+const STORAGE_KEY_CV = 'ym_cv_profile_data_v3';
 
 export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [profileImage, setProfileImage] = useState<string>(() => {
@@ -45,6 +49,8 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
 
   const [isCVModalOpen, setIsCVModalOpen] = useState(false);
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [isDriveModalOpen, setIsDriveModalOpen] = useState(false);
+  const [driveModalTab, setDriveModalTab] = useState<'photo' | 'resume'>('photo');
 
   // Sync profileImage with cvData
   useEffect(() => {
@@ -101,6 +107,12 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const openImageModal = () => setIsImageModalOpen(true);
   const closeImageModal = () => setIsImageModalOpen(false);
 
+  const openDriveModal = (tab: 'photo' | 'resume' = 'photo') => {
+    setDriveModalTab(tab);
+    setIsDriveModalOpen(true);
+  };
+  const closeDriveModal = () => setIsDriveModalOpen(false);
+
   return (
     <ProfileContext.Provider
       value={{
@@ -108,6 +120,8 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
         cvData,
         isCVModalOpen,
         isImageModalOpen,
+        isDriveModalOpen,
+        driveModalTab,
         updateProfileImage,
         updateCV,
         resetCV,
@@ -116,6 +130,8 @@ export const ProfileProvider: React.FC<{ children: React.ReactNode }> = ({ child
         closeCVModal,
         openImageModal,
         closeImageModal,
+        openDriveModal,
+        closeDriveModal,
       }}
     >
       {children}
