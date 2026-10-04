@@ -22,12 +22,6 @@ export default function Hero() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
         {/* Left Column: Core Positioning & Headings */}
         <div className="lg:col-span-7 flex flex-col items-start text-left">
-          {/* Subtitle / Role Tagline */}
-          <div className="font-mono text-xs uppercase tracking-widest text-accent font-semibold mb-3 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
-            Junior Backend Developer · Cape Town, ZA
-          </div>
-
           {/* Hero Headline */}
           <h1 className="text-4xl sm:text-6xl lg:text-[4rem] font-bold tracking-tight text-fg leading-[1.08] mb-6">
             Yamkela Macwili
