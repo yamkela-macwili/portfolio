@@ -1,6 +1,9 @@
-import { ArrowRight, ArrowDownRight, ExternalLink, Terminal, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ArrowDownRight, ExternalLink, FileText, MapPin, CheckCircle2 } from 'lucide-react';
+import { useProfile } from '../context/ProfileContext';
 
 export default function Hero() {
+  const { profileImage, openCVModal } = useProfile();
+
   const primaryStack = [
     { name: 'Python', role: 'Backend & Data' },
     { name: 'FastAPI', role: 'REST APIs' },
@@ -16,11 +19,12 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 px-6 max-w-6xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
         {/* Left Column: Core Positioning & Headings */}
         <div className="lg:col-span-7 flex flex-col items-start text-left">
           {/* Subtitle / Role Tagline */}
-          <div className="font-mono text-xs uppercase tracking-widest text-accent-light font-semibold mb-3">
+          <div className="font-mono text-xs uppercase tracking-widest text-accent font-semibold mb-3 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             Full-Stack Software Engineer &amp; Data Architect · Cape Town, ZA
           </div>
 
@@ -34,7 +38,7 @@ export default function Hero() {
             I engineer resilient web applications, distributed backend services, and automated data pipelines. Backed by academic training in <span className="text-fg font-medium">Applied Statistics</span> with rigorous production focus on data integrity, determinism, and high-performance user interfaces.
           </p>
 
-          {/* Dual Action CTA Buttons & Quick Links */}
+          {/* Action CTA Buttons & Quick Links */}
           <div className="flex flex-wrap items-center gap-3 sm:gap-4 mb-4 w-full sm:w-auto">
             <a
               href="#projects"
@@ -43,12 +47,14 @@ export default function Hero() {
               Explore Projects <ArrowDownRight size={16} />
             </a>
 
-            <a
-              href="#contact"
-              className="w-full sm:w-auto px-5 py-3.5 bg-surface border border-border text-fg hover:border-accent hover:text-accent transition-colors duration-200 rounded-xl text-xs font-mono font-semibold inline-flex items-center justify-center gap-2 active:scale-95"
+            <button
+              onClick={openCVModal}
+              className="w-full sm:w-auto px-5 py-3.5 bg-surface border border-border text-fg hover:border-accent hover:text-accent transition-colors duration-200 rounded-xl text-xs font-mono font-semibold inline-flex items-center justify-center gap-2 active:scale-95 group cursor-pointer"
+              title="Open Curriculum Vitae"
             >
-              Get in Touch <ArrowRight size={15} />
-            </a>
+              <FileText size={15} className="text-accent group-hover:scale-110 transition-transform" />
+              <span>View CV / Resume</span>
+            </button>
 
             <div className="flex items-center gap-2 pt-2 sm:pt-0">
               <a
@@ -70,91 +76,48 @@ export default function Hero() {
               >
                 LinkedIn <ExternalLink size={12} />
               </a>
-
-              <a
-                href="/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3.5 py-3 bg-surface border border-border text-fg-muted hover:text-fg hover:border-border-hover rounded-xl text-xs font-mono inline-flex items-center gap-1.5 transition-colors"
-                title="Resume PDF"
-              >
-                Resume <ExternalLink size={12} />
-              </a>
             </div>
           </div>
         </div>
 
-        {/* Right Column: Visual Tech Showcase Card */}
-        <div className="lg:col-span-5">
-          <div className="rounded-2xl bg-surface border border-border p-6 shadow-xl">
-            {/* Window Chrome Header */}
-            <div className="flex items-center justify-between pb-4 mb-5 border-b border-border">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-border-hover inline-block" />
-                <span className="w-3 h-3 rounded-full bg-border-hover inline-block" />
-                <span className="w-3 h-3 rounded-full bg-border-hover inline-block" />
-              </div>
-              <div className="font-mono text-[11px] text-fg-subtle flex items-center gap-1.5">
-                <Terminal size={12} className="text-accent" />
-                yamkela.dev ~ arch_spec
-              </div>
-              <div className="w-8" />
-            </div>
+        {/* Right Column: Clean Profile Image Holder Frame */}
+        <div className="lg:col-span-5 flex justify-center">
+          <div className="relative w-full max-w-md group">
+            {/* Ambient Background Glow */}
+            <div className="absolute -inset-1.5 bg-gradient-to-tr from-accent/20 via-border-hover/30 to-accent/10 rounded-3xl blur-xl opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-            {/* Profile Identity Info */}
-            <div className="flex items-center gap-4 p-4 rounded-xl bg-surface-raised border border-border mb-5">
-              <div className="w-12 h-12 rounded-xl bg-surface-hover border border-border flex items-center justify-center text-fg font-mono font-bold text-lg shrink-0">
-                YM
-              </div>
-              <div className="min-w-0">
-                <div className="text-sm font-bold text-fg">
-                  Yamkela Macwili
-                </div>
-                <div className="text-xs text-fg-secondary truncate">
-                  Full-Stack &amp; Backend Systems Engineer
-                </div>
-                <div className="text-[11px] font-mono text-fg-subtle">
-                  BSc in Applied Statistics (2019 - 2022)
-                </div>
-              </div>
-            </div>
-
-            {/* Solid Code Preview Block */}
-            <div className="rounded-xl bg-base border border-border p-4 font-mono text-xs text-fg-secondary leading-relaxed mb-5 overflow-x-auto">
-              <div className="text-fg-subtle mb-2"># System Architecture Spec</div>
-              <div><span className="text-accent font-semibold">class</span> <span className="text-fg font-semibold">Engineer</span>:</div>
-              <div className="pl-4 text-fg-muted">
-                name = <span className="text-fg">"Yamkela Macwili"</span><br />
-                location = <span className="text-fg">"Cape Town, ZA"</span><br />
-                domains = [<span className="text-accent">"Full-Stack"</span>, <span className="text-accent">"ETL Pipelines"</span>, <span className="text-accent">"AI"</span>]<br />
-                stack = [<span className="text-accent">"Python"</span>, <span className="text-accent">"FastAPI"</span>, <span className="text-accent">"React"</span>, <span className="text-accent">"PostgreSQL"</span>]<br />
-                status = <span className="text-accent font-semibold">"Ready for impact"</span>
-              </div>
-            </div>
-
-            {/* Core Competencies Quick Grid */}
-            <div className="space-y-2">
-              <div className="text-[11px] font-mono uppercase tracking-wider text-fg-subtle font-semibold mb-2">
-                Key Engineering Highlights
+            {/* Main Image Holder Card */}
+            <div className="relative rounded-3xl bg-surface border border-border overflow-hidden shadow-2xl p-4 sm:p-5 flex flex-col">
+              {/* Photo Frame Container */}
+              <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-base border border-border group/img">
+                <img
+                  src={profileImage || '/profile.jpg'}
+                  alt="Yamkela Macwili — Software Engineer"
+                  className="w-full h-full object-cover object-center transition-transform duration-500 group-hover/img:scale-[1.03]"
+                />
               </div>
 
-              <div className="grid grid-cols-2 gap-2 text-xs">
-                <div className="p-2.5 rounded-lg bg-surface-raised border border-border flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-accent shrink-0" />
-                  <span className="text-fg-secondary truncate">RESTful APIs</span>
+              {/* Bottom Identity & Quick Actions Strip */}
+              <div className="mt-4 pt-3 border-t border-border flex items-center justify-between gap-3">
+                <div>
+                  <div className="text-sm font-bold text-fg flex items-center gap-1.5">
+                    Yamkela Macwili
+                    <CheckCircle2 size={14} className="text-accent" />
+                  </div>
+                  <div className="text-[11px] font-mono text-fg-subtle flex items-center gap-1 mt-0.5">
+                    <MapPin size={11} className="text-accent" />
+                    <span>Cape Town, South Africa</span>
+                  </div>
                 </div>
-                <div className="p-2.5 rounded-lg bg-surface-raised border border-border flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-accent shrink-0" />
-                  <span className="text-fg-secondary truncate">Airflow 3 DAGs</span>
-                </div>
-                <div className="p-2.5 rounded-lg bg-surface-raised border border-border flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-accent shrink-0" />
-                  <span className="text-fg-secondary truncate">SQL Transformations</span>
-                </div>
-                <div className="p-2.5 rounded-lg bg-surface-raised border border-border flex items-center gap-2">
-                  <CheckCircle2 size={14} className="text-accent shrink-0" />
-                  <span className="text-fg-secondary truncate">Azure OpenAI</span>
-                </div>
+
+                <button
+                  type="button"
+                  onClick={openCVModal}
+                  className="px-3 py-1.5 rounded-lg bg-surface-raised hover:bg-surface-hover border border-border hover:border-accent text-accent font-mono text-xs font-semibold flex items-center gap-1.5 transition-colors cursor-pointer"
+                >
+                  <FileText size={12} />
+                  <span>Open CV</span>
+                </button>
               </div>
             </div>
           </div>

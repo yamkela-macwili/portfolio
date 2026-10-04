@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, FileText } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../context/AuthContext';
+import { useProfile } from '../context/ProfileContext';
 import { Link, useLocation } from 'react-router-dom';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { user } = useAuth();
+  const { openCVModal } = useProfile();
   const location = useLocation();
   const isHome = location.pathname === '/';
 
@@ -86,6 +88,13 @@ export default function Navbar() {
                 </a>
               )
             ))}
+            <button
+              onClick={openCVModal}
+              className="px-3.5 py-1.5 rounded-full text-xs font-mono font-medium text-accent hover:bg-surface-raised transition-colors flex items-center gap-1"
+            >
+              <FileText size={12} />
+              <span>CV</span>
+            </button>
             {user && (
               <Link
                 to="/admin"
@@ -97,12 +106,21 @@ export default function Navbar() {
           </nav>
 
           {/* Right Action & Let's Talk CTA */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
+            <button
+              onClick={openCVModal}
+              className="hidden lg:inline-flex items-center gap-1 text-xs font-mono text-fg-muted hover:text-fg px-3.5 py-2 rounded-xl border border-border bg-surface hover:border-border-hover transition-colors"
+              title="Open Curriculum Vitae"
+            >
+              <FileText size={12} className="text-accent" />
+              <span>Resume</span>
+            </button>
+
             <a
               href="https://github.com/yamkela-macwili"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden lg:inline-flex items-center gap-1 text-xs font-mono text-fg-muted hover:text-fg px-3.5 py-2 rounded-xl border border-border bg-surface hover:border-border-hover transition-colors"
+              className="hidden sm:inline-flex items-center gap-1 text-xs font-mono text-fg-muted hover:text-fg px-3.5 py-2 rounded-xl border border-border bg-surface hover:border-border-hover transition-colors"
             >
               GitHub <ArrowUpRight size={12} />
             </a>
@@ -158,6 +176,18 @@ export default function Navbar() {
                   </a>
                 )
               ))}
+
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  openCVModal();
+                }}
+                className="text-lg font-medium text-accent hover:underline py-3 border-b border-border transition-colors text-left flex items-center justify-between"
+              >
+                <span>Curriculum Vitae / Resume</span>
+                <FileText size={18} />
+              </button>
+
               {user && (
                 <Link
                   to="/admin"

@@ -1,9 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import { ProfileProvider } from './context/ProfileContext';
 import Navbar from './components/Navbar';
 import ScrollProgress from './components/ScrollProgress';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
+import CVModal from './components/CVModal';
+import ImageUploadModal from './components/ImageUploadModal';
 import Home from './pages/Home';
 import ProjectsPage from './pages/ProjectsPage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
@@ -20,35 +23,39 @@ import ProtectedRoute from './components/ProtectedRoute';
 export default function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <div className="min-h-screen bg-base text-fg font-sans selection:bg-accent/30 selection:text-fg">
-          <ScrollProgress />
-          <ScrollToTop />
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/projects/:slug" element={<ProjectDetailPage />} />
-            <Route path="/blog" element={<BlogPage />} />
-            <Route path="/blog/:slug" element={<BlogPostPage />} />
-            
-            {/* Admin Routes */}
-            <Route path="/admin/login" element={<LoginPage />} />
-            <Route element={<ProtectedRoute />}>
-              <Route path="/admin" element={<AdminDashboard />} />
-              <Route path="/admin/projects/new" element={<ProjectEditor />} />
-              <Route path="/admin/projects/:slug" element={<ProjectEditor />} />
-              <Route path="/admin/posts/new" element={<PostEditor />} />
-              <Route path="/admin/posts/:slug" element={<PostEditor />} />
-              <Route path="/admin/education/new" element={<EducationEditor />} />
-              <Route path="/admin/education/:id" element={<EducationEditor />} />
-              <Route path="/admin/certifications/new" element={<CertificationEditor />} />
-              <Route path="/admin/certifications/:id" element={<CertificationEditor />} />
-            </Route>
-          </Routes>
-          <Footer />
-        </div>
-      </BrowserRouter>
+      <ProfileProvider>
+        <BrowserRouter>
+          <div className="min-h-screen bg-base text-fg font-sans selection:bg-accent/30 selection:text-fg">
+            <ScrollProgress />
+            <ScrollToTop />
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+              <Route path="/blog" element={<BlogPage />} />
+              <Route path="/blog/:slug" element={<BlogPostPage />} />
+              
+              {/* Admin Routes */}
+              <Route path="/admin/login" element={<LoginPage />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/projects/new" element={<ProjectEditor />} />
+                <Route path="/admin/projects/:slug" element={<ProjectEditor />} />
+                <Route path="/admin/posts/new" element={<PostEditor />} />
+                <Route path="/admin/posts/:slug" element={<PostEditor />} />
+                <Route path="/admin/education/new" element={<EducationEditor />} />
+                <Route path="/admin/education/:id" element={<EducationEditor />} />
+                <Route path="/admin/certifications/new" element={<CertificationEditor />} />
+                <Route path="/admin/certifications/:id" element={<CertificationEditor />} />
+              </Route>
+            </Routes>
+            <Footer />
+            <CVModal />
+            <ImageUploadModal />
+          </div>
+        </BrowserRouter>
+      </ProfileProvider>
     </AuthProvider>
   );
 }
